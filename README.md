@@ -1,6 +1,6 @@
 # pnerp Database Documentation
 
-Dokumentacija MariaDB šeme za pnerp ERP sistem — 81 tabela.
+Dokumentacija MariaDB šeme za pnerp ERP sistem ~ 155 tabela.
 
 ## Lokalno pokretanje
 
