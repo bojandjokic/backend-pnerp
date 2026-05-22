@@ -1,0 +1,35 @@
+---
+title: time_sheets
+description: "Dnevni unosi radnog lista po zaposleniku. Prati početak/kraj radnog vremena i kategorizuje sate po 15 vrsta (redovni, prekovremeni, noćni rad, razne vrste odsustva, bolovanje, itd.)."
+---
+
+# `pnerp.time_sheets`
+
+:::note[Modul]
+**Plaće / HR** — Dnevna evidencija prisustva i radnih sati zaposlenika
+:::
+
+## Opis
+
+Dnevni unosi radnog lista po zaposleniku. Prati početak/kraj radnog vremena i kategorizuje sate po 15 vrsta (redovni, prekovremeni, noćni rad, razne vrste odsustva, bolovanje, itd.).
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| OrderID | int | NE |  | 🔗 SV → `zaglavlje` time_sheet |
+| Date | date | NE |  | Datum rada |
+| WorkStart / WorkStop | time | NE |  | Početak i kraj smjene |
+| RegularWorkHours / NightWork / Overtime / HolidayWork / FieldWork / Duty / Standby | tinyint | DA |  | Kategorije odrađenih sati |
+| Holiday / NonWorkDay / TemporaryDisability / MaternityLeave / PaidLeave / UnPaidLeave / NoFaultLeave / AnotherReasonLeave | tinyint | DA |  | Kategorije odsustva |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Referencira zaglavlje time_sheet.
+

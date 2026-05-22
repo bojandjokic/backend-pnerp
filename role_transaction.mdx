@@ -1,0 +1,30 @@
+---
+title: role_transaction
+description: "Veza više-prema-više koja dodjeljuje transakcije ulogama."
+---
+
+# `pnerp.role_transaction`
+
+:::note[Modul]
+**Bezbjednost** — Dodjela transakcija ulogama
+:::
+
+## Opis
+
+Veza više-prema-više koja dodjeljuje transakcije ulogama.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| RoleID | smallint | NE |  | 🔗 SV → `role`; kompozitni PK |
+| TransactionID | smallint | NE |  | 🔗 SV → `transaction`; kompozitni PK |
+
+## Indeksi
+
+Kompozitni PK. Indeks na TransactionID.
+
+## Relacije
+
+SV → role, transaction.
+

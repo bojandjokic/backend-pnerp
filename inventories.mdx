@@ -1,0 +1,34 @@
+---
+title: inventories
+description: "Stavke dokumenta fizičkog popisa zaliha. Svaki red bilježi prebrojanu količinu određenog proizvoda."
+---
+
+# `pnerp.inventories`
+
+:::note[Modul]
+**Inventar / Magacin** — Stavke fizičkog popisa zaliha
+:::
+
+## Opis
+
+Stavke dokumenta fizičkog popisa zaliha. Svaki red bilježi prebrojanu količinu određenog proizvoda.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| OrderID | int | NE |  | 🔗 SV → `zaglavlje` inventory |
+| OrdinalNumber | smallint | NE |  | Redni broj stavke |
+| ProductID | mediumint | DA |  | 🔗 SV → `product` |
+| Qty | double(10,3) | DA |  | Prebrojana količina |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Referencira zaglavlje inventory, product.
+

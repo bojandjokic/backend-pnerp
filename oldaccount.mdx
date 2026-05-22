@@ -1,0 +1,39 @@
+---
+title: oldaccount
+description: "Kontni plan (konta glavne knjige) po entitetu. Podržava AOP klasifikaciju izvještavanja, dodjelu PDV obaveze, KUF broj i veze na hijerarhije klasa konta i sintetike."
+---
+
+# `pnerp.oldaccount`
+
+:::note[Modul]
+**Računovodstvo / Finansije** — Matični podaci kontnog plana
+:::
+
+## Opis
+
+Kontni plan (konta glavne knjige) po entitetu. Podržava AOP klasifikaciju izvještavanja, dodjelu PDV obaveze, KUF broj i veze na hijerarhije klasa konta i sintetike.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| EntityID | tinyint | NE |  | Pravni entitet (RS/FBIH/BD) |
+| Account | varchar(8) | NE |  | Šifra konta; jedinstvena po entitetu kada je aktivna |
+| Name | varchar(200) | NE |  | Naziv konta |
+| AOPID | smallint | DA |  | 🔗 SV → `AOP` stavka izvještavanja |
+| CustomerRequired | tinyint | DA |  | Zahtijeva kupca pri knjiženju |
+| ObligatedVATID | tinyint | DA |  | 🔗 SV → `obligated_vat` |
+| KUFNo | tinyint | DA |  | Broj kolone KUF knjige (knjiga ulaznih faktura) |
+| ClassID / SyntheticsID | smallint | DA |  | Reference hijerarhije konta |
+| InvoiceTypeID | tinyint | DA |  | 🔗 SV → `invoice_type` |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (EntityID, Account, IsActive). Indeksi na SyntheticsID, ClassID, AOPID, Name.
+
+## Relacije
+
+Referenciraju ga protocol_accounts (AccountID), protocol_addition (AccountID).
+

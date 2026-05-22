@@ -1,0 +1,35 @@
+---
+title: standard_materials
+description: "Stavke komponenti sastavnice materijala za standardni materijal. Definiše koje sirovine i u kojim količinama su potrebne za proizvodnju standardne količine."
+---
+
+# `pnerp.standard_materials`
+
+:::note[Modul]
+**Proizvodnja** — Stavke komponenti standardne sastavnice materijala
+:::
+
+## Opis
+
+Stavke komponenti sastavnice materijala za standardni materijal. Definiše koje sirovine i u kojim količinama su potrebne za proizvodnju standardne količine.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| OrderID | int | NE |  | 🔗 SV → `zaglavlje` standard_material |
+| OrdinalNumber | smallint | NE |  | Redoslijed komponente |
+| ProductID | mediumint | NE |  | 🔗 SV → `sirovina`/komponenta |
+| Description | varchar(100) | DA |  | Opis komponente |
+| Qty | decimal(10,3) | NE |  | Potrebna količina komponente |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (OrderID, OrdinalNumber, IsActive). Indeksi na ProductID.
+
+## Relacije
+
+Referencira zaglavlje standard_material, product.
+

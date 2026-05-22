@@ -1,0 +1,34 @@
+---
+title: qualifications
+description: "Šifarnik nivoa akademskih/stručnih kvalifikacija s kraticom, šifrom stepena i poreskim kodom za izvještaje o platama."
+---
+
+# `pnerp.qualifications`
+
+:::note[Modul]
+**HR** — Šifarnik stepena stručne spreme/kvalifikacija
+:::
+
+## Opis
+
+Šifarnik nivoa akademskih/stručnih kvalifikacija s kraticom, šifrom stepena i poreskim kodom za izvještaje o platama.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE | AUTO | 🔑 Primarni ključ |
+| Abbreviation | varchar(4) | DA |  | Kratka šifra, npr. VSS |
+| Name | varchar(45) | NE |  | Puni naziv kvalifikacije |
+| Degree | varchar(5) | DA |  | Šifra stepena |
+| TaxCode | varchar(3) | DA |  | Šifra za poresko izvještavanje |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Referenciraju ga zapisi zaposlenika.
+

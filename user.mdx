@@ -1,0 +1,40 @@
+---
+title: user
+description: "Korisnički nalozi aplikacije. Implementira ASP.NET Core Identity konvencije s dodatnim ERP-specifičnim poljima za lokalizaciju, UI preferencije, podešavanja kontrolne ploče i nadjačavanje naziva na fa"
+---
+
+# `pnerp.user`
+
+:::note[Modul]
+**Bezbjednost / Sistem** — Matični podaci korisničkih naloga s UI preferencijama
+:::
+
+## Opis
+
+Korisnički nalozi aplikacije. Implementira ASP.NET Core Identity konvencije s dodatnim ERP-specifičnim poljima za lokalizaciju, UI preferencije, podešavanja kontrolne ploče i nadjačavanje naziva na fakturi.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | mediumint | NE | AUTO | 🔑 Primarni ključ |
+| UserName / Email / NormalizedEmail | varchar | NE |  | Identity polja |
+| PasswordHash / SecurityStamp / ConcurrencyStamp | char/varchar | NE/DA |  | Identity sigurnosna polja |
+| EmailConfirmed / PhoneNumberConfirmed / TwoFactorEnabled / LockoutEnabled | tinyint | NE | 0 | Zastavice Identity stanja |
+| LockoutEnd / AccessFailedCount | date/mediumint | DA |  | Upravljanje blokadom |
+| FullName / JobTitle | varchar | NE/DA |  | Korisnički profil |
+| Locale / Language / LocaleNumber / Currency | varchar/char | NE |  | Preferencije lokalizacije |
+| ThemeID | tinyint | NE | 1 | Odabir UI teme |
+| IsCustomerChange / IsSettings / OpenLinksInNewTab / ShowDashBoard* | tinyint | NE/DA | 0 | UI preferencije ponašanja |
+| NameInvoice | varchar(45) | DA |  | Ime za štampanje na fakturama |
+| IsEnabled | tinyint | DA | 1 | Zastavica aktivnosti naloga |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (UserName, IsActive). Indeks na IsActive.
+
+## Relacije
+
+Referencira se kao CreatedBy/UpdatedBy u svim tabelama. Ima zapise u user_company, user_role, user_login, user_token.
+

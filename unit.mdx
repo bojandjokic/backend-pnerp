@@ -1,0 +1,43 @@
+---
+title: unit
+description: "Predstavlja organizacione jedinice kao što su magacini, prodavnice, kancelarije i poslovnice. Podržava hijerarhijsku strukturu (samo-referenciranje ParentID s Path/Level/Position za navigaciju stablom"
+---
+
+# `pnerp.unit`
+
+:::note[Modul]
+**Organizacija / Sistem** — Matični podaci organizacionih jedinica/lokacija (hijerarhijski)
+:::
+
+## Opis
+
+Predstavlja organizacione jedinice kao što su magacini, prodavnice, kancelarije i poslovnice. Podržava hijerarhijsku strukturu (samo-referenciranje ParentID s Path/Level/Position za navigaciju stablom). Svaka jedinica ima tip koji kontroliše njeno računovodstveno i magacinsko ponašanje, te konfiguraciju po jedinici za zalihe, fakturisanje i upravljanje cijenama.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| CompanyID | smallint | NE |  | Vlasnik kompanija |
+| Code / Name | smallint/varchar(70) | NE |  | Jedinstven po kompaniji kada je aktivan |
+| UnitTypeID | tinyint | NE |  | 🔗 SV → `unit_type` |
+| UnitTypePurchaseID | tinyint | DA |  | Vrsta jedinice za nabavu |
+| Address / CityID / Phone1 / Phone2 / Email | razno | DA |  | Kontakt podaci |
+| TaxNo | char(13) | DA |  | Poreski broj jedinice |
+| AveragePurchasePrice | tinyint | DA |  | Zastavica za metodu prosječne cijene |
+| AutomaticLevelingEntry/Output | tinyint | DA |  | Automatsko nivelisanje cijene na ulazu/izlazu |
+| MinusStock | tinyint | DA |  | Dozvoli negativne zalihe |
+| InitialInvoiceNumber / MaxInvoiceNumber | smallint/tinyint | NE/DA | 0 | Opseg broja fakture |
+| StockPlusSearch | tinyint | DA |  | Prikazati samo artikle na zalihi u pretrazi |
+| ParentID / Level / Path / Position | razno | DA |  | Polja hijerarhije stabla; Path čuva materijalizovanu putanju |
+| JOPP | varchar(20) | DA |  | Zvanična organizaciona šifra |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (CompanyID, Code, IsActive) i (CompanyID, Name, IsActive). Indeksi na ParentID (idx_unit_parent), Path (idx_unit_path), (ParentID, Position) (idx_unit_position), CityID, UnitTypeID.
+
+## Relacije
+
+Samo-referenciranje hijerarhije. Referencira company, city, unit_type. Referenciraju ga order, invoice, stock, protocol, subunit i gotovo sve transakcione tabele.
+

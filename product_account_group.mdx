@@ -1,0 +1,34 @@
+---
+title: product_account_group
+description: "Mapira proizvode na računovodstvene grupe po entitetu. Dodjeljuje protokol knjiženja i vrstu naloga za automatizovano dvojno knjiženje po kategorijama proizvoda."
+---
+
+# `pnerp.product_account_group`
+
+:::note[Modul]
+**Računovodstvo / Finansije** — Računovodstvena klasifikacija za automatsko knjiženje
+:::
+
+## Opis
+
+Mapira proizvode na računovodstvene grupe po entitetu. Dodjeljuje protokol knjiženja i vrstu naloga za automatizovano dvojno knjiženje po kategorijama proizvoda.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| EntityID | tinyint | NE |  | Pravni entitet (RS/FBIH/BD) |
+| Name | varchar(50) | NE |  | Jedinstven po entitetu kada je aktivan |
+| OrderTypeID | tinyint | NE |  | 🔗 SV → `order_type` |
+| ProtocolTypeID | smallint | NE |  | 🔗 SV → `protocol_type` |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (EntityID, Name, IsActive); indeksi na OrderTypeID, ProtocolTypeID.
+
+## Relacije
+
+Referencira ga product.ProductAccountGroupID. Referencira order_type, protocol_type.
+

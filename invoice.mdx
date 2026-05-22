@@ -1,0 +1,39 @@
+---
+title: invoice
+description: "Zaglavlje tabele za fakture, paralelne strukture s tabelom order. Koristi se kada sistem vodi posebne fakturne dokumente odvojene od naloga. Uključuje polja za fiskalnu usklađenost za e-fakturisanje ("
+---
+
+# `pnerp.invoice`
+
+:::note[Modul]
+**Prodaja / Finansije / E-fakturisanje** — Zaglavlja faktura (fiskalna usklađenost)
+:::
+
+## Opis
+
+Zaglavlje tabele za fakture, paralelne strukture s tabelom order. Koristi se kada sistem vodi posebne fakturne dokumente odvojene od naloga. Uključuje polja za fiskalnu usklađenost za e-fakturisanje (InvoiceNumber, InvoiceCounter, VerificationUrl, InvoiceDateTime, IsCancelled).
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| Year / UnitID / OrderTypeID / Order | razno | NE |  | Identifikacija dokumenta |
+| CustomerID | mediumint | DA |  | 🔗 SV → `customer` |
+| InvoiceAmount / DiscountAmount / TaxBaseAmount / TaxAmoun / AmountWithVAT / AmountLessVAT | double(14,2) | NE | 0.00 | Finansijski zbiri |
+| InvoiceNumber / InvoiceCounter / InvoiceDateTime | varchar/datetime | DA |  | Službena fiskalna identifikacija fakture |
+| VerificationUrl | text | DA |  | URL za verifikaciju poreske uprave |
+| IsCancelled / CancelledID / CancelledInvoiceNumber / CancelledInvoiceDateTime | razno | DA |  | Polja lanca storniranja |
+| InvoiceID | int | DA |  | Veza nazad na originalni nalog |
+| InvoiceType / TransactionType / PaymentType | varchar | DA |  | Klasifikacija dokumenta za fiskalnu evidenciju |
+| WorkOrderOrder | mediumint | DA |  | Broj srodnog radnog naloga |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Isti pattern indeksa kao order: jedinstven na (Year, UnitID, UnitPredispositionID, OrderTypeID, Order, IsActive). Kompozitni InvoiceReport indeks. Indeksi na svim SV i filterskim kolonama.
+
+## Relacije
+
+Ogledalo tabele order; referencira unit, order_type, customer. Stavke su u invoices. Referencira protocol. Vezan za order putem InvoiceID.
+

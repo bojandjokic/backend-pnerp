@@ -1,0 +1,33 @@
+---
+title: note
+description: "Tekstualne napomene ili predlošci na nivou kompanije, višekratno upotrebljivi na dokumentima."
+---
+
+# `pnerp.note`
+
+:::note[Modul]
+**UI / Dokumenti** — Biblioteka višekratno upotrebljivih napomena/predložaka
+:::
+
+## Opis
+
+Tekstualne napomene ili predlošci na nivou kompanije, višekratno upotrebljivi na dokumentima.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| CompanyID | smallint | NE |  | Vezan za kompaniju |
+| Name | varchar(45) | NE |  | Oznaka napomene |
+| Description | text | DA |  | Sadržaj napomene |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Referencira company.
+

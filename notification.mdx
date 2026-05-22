@@ -1,0 +1,34 @@
+---
+title: notification
+description: "Zapisi obavještenja aplikacije za korisnike. Svako obavještenje ima naziv, opcioni opis, URL duboke veze i status čitanja."
+---
+
+# `pnerp.notification`
+
+:::note[Modul]
+**UI / Sistem** — Sistem obavještavanja unutar aplikacije
+:::
+
+## Opis
+
+Zapisi obavještenja aplikacije za korisnike. Svako obavještenje ima naziv, opcioni opis, URL duboke veze i status čitanja.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(30) | NE |  | Naslov obavještenja |
+| Description | varchar(255) | DA |  | Tijelo obavještenja |
+| Link | varchar(255) | DA |  | URL duboke veze |
+| IsRead | tinyint | DA | 1 | 0 = nepročitano, 1 = pročitano |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Referencira user putem CreatedBy.
+

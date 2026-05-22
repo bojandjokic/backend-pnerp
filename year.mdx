@@ -1,0 +1,33 @@
+---
+title: year
+description: "Konfiguracija fiskalne godine. Kontroliše zaključavanje godine (sprečava izmjene u zatvorenim periodima) i mapira tinyint offsete na pune četvorocifrene godine."
+---
+
+# `pnerp.year`
+
+:::note[Modul]
+**Finansije / Sistem** — Registar fiskalnih godina i kontrola zaključavanja
+:::
+
+## Opis
+
+Konfiguracija fiskalne godine. Kontroliše zaključavanje godine (sprečava izmjene u zatvorenim periodima) i mapira tinyint offsete na pune četvorocifrene godine.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE |  | Ručni PK (offset godine) |
+| FullYear | smallint | DA |  | Četvorocifrena godina; jedinstvena kada je aktivna |
+| IsLocked | tinyint | DA |  | 1 = period zatvoren, izmjene nisu dozvoljene |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt | revizija | - | - |  |
+| IsActive | tinyint | NE | 1 | Dio kompozitnog PK |
+
+## Indeksi
+
+Jedinstven na (FullYear, IsActive).
+
+## Relacije
+
+Indirektno ga referenciraju sve tabele s poljem Year.
+

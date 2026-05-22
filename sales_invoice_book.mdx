@@ -1,0 +1,31 @@
+---
+title: sales_invoice_book
+description: "Denormalizovana tabela/pogled za izvještavanje KIF knjige (knjiga izlaznih faktura). Sadrži sve propisane kolone za zvaničnu evidenciju prodajnih faktura prema propisima o PDV-u u BiH."
+---
+
+# `pnerp.sales_invoice_book`
+
+:::note[Modul]
+**Porez / Izvještavanje** — KIF knjiga — regulatorno PDV izvještavanje
+:::
+
+## Opis
+
+Denormalizovana tabela/pogled za izvještavanje KIF knjige (knjiga izlaznih faktura). Sadrži sve propisane kolone za zvaničnu evidenciju prodajnih faktura prema propisima o PDV-u u BiH.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| Year / CompanyID / InvoiceNo / CustomerID | razno | varira |  | Identifikacija dokumenta |
+| OrdinalNumber1 do CustomerBC16 | razno | DA |  | Kolone KIF izvještaja prema propisima |
+| MonthID / monthCode / monthName | tinyint/char/varchar | DA |  | Dimenzija mjeseca za filtriranje |
+
+## Indeksi
+
+Nema primarnog ključa ni indeksa — tabela za izvještavanje/staging.
+
+## Relacije
+
+Nema SV; popunjava se iz upita nad invoice/protocol podacima.
+

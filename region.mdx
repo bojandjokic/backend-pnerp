@@ -1,0 +1,33 @@
+---
+title: region
+description: "Geografski matični podaci regiona koji pripada određenoj državi."
+---
+
+# `pnerp.region`
+
+:::note[Modul]
+**Geografija / Sistem** — Geografski matični podaci regiona
+:::
+
+## Opis
+
+Geografski matični podaci regiona koji pripada određenoj državi.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | mediumint | NE | AUTO | 🔑 Primarni ključ |
+| CountryID | tinyint | NE |  | 🔗 SV → `country` |
+| Name | varchar(50) | NE |  | Naziv regiona |
+| Abbreviation | varchar(3) | DA |  | Kratka šifra |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Referencira country. Referencira ga municipality.
+

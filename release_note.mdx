@@ -1,0 +1,33 @@
+---
+title: release_note
+description: "Čuva bilješke o verzijama aplikacije po verziji s datumom i sadržajem, omogućavajući korisnicima da pregledaju historiju promjena unutar aplikacije."
+---
+
+# `pnerp.release_note`
+
+:::note[Modul]
+**Sistem** — Verzijski changelog / bilješke o izdavanjima aplikacije
+:::
+
+## Opis
+
+Čuva bilješke o verzijama aplikacije po verziji s datumom i sadržajem, omogućavajući korisnicima da pregledaju historiju promjena unutar aplikacije.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | mediumint | NE | AUTO | 🔑 Primarni ključ |
+| Version | varchar(6) | NE |  | String verzije, npr. 1.2.3 |
+| Date | date | NE |  | Datum izdavanja |
+| Note | longtext | DA |  | Sadržaj bilješke o izdavanju |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Indeksi na Version, Date, Note, IsActive.
+
+## Relacije
+
+Stavke su u release_notes.
+

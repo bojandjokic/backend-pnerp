@@ -1,0 +1,30 @@
+---
+title: user_role
+description: "Veza više-prema-više između korisnika i uloge."
+---
+
+# `pnerp.user_role`
+
+:::note[Modul]
+**Bezbjednost** — Dodjela korisnika ulogama
+:::
+
+## Opis
+
+Veza više-prema-više između korisnika i uloge.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| UserID | mediumint | NE |  | 🔗 SV → `user`; dio kompozitnog PK |
+| RoleID | smallint | NE |  | 🔗 SV → `role`; dio kompozitnog PK |
+
+## Indeksi
+
+Kompozitni PK na (UserID, RoleID). Indeks na RoleID.
+
+## Relacije
+
+SV → user, role.
+

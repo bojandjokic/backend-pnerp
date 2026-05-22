@@ -1,0 +1,31 @@
+---
+title: jobs
+description: "Šifarnik radnih mjesta/pozicija koji se koristi u upravljanju HR-om."
+---
+
+# `pnerp.jobs`
+
+:::note[Modul]
+**HR** — Šifarnik radnih pozicija
+:::
+
+## Opis
+
+Šifarnik radnih mjesta/pozicija koji se koristi u upravljanju HR-om.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(45) | NE |  | Naziv radnog mjesta |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Referenciraju ga zapisi zaposlenika.
+

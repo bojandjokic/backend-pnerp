@@ -1,0 +1,35 @@
+---
+title: kind_of_hours
+description: "Definiše vrste radnih sati za obračun plaća (redovni, prekovremeni, noćni, praznici, itd.) s procentualnim multiplikatorima, obračunima zasnovanim na formulama i zastavicama za porez/M4 izvještaj."
+---
+
+# `pnerp.kind_of_hours`
+
+:::note[Modul]
+**Plaće / HR** — Matični podaci vrsta radnih sati za obračun plaća
+:::
+
+## Opis
+
+Definiše vrste radnih sati za obračun plaća (redovni, prekovremeni, noćni, praznici, itd.) s procentualnim multiplikatorima, obračunima zasnovanim na formulama i zastavicama za porez/M4 izvještaj.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(45) | NE |  | Naziv vrste sata |
+| Percentage | double(6,2) | DA |  | Procentualni multiplikator |
+| BasicHours / PreviousWork / Tax / EntersM4 | tinyint | DA |  | Zastavice obračuna plaća |
+| Abbreviation | varchar(5) | NE |  | Kratka šifra za prikaz |
+| Formula | varchar(255) | NE |  | Izraz formule za obračun plaća |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Indirektno ga referenciraju time_sheets (putem obrade plaća).
+

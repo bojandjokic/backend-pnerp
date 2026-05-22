@@ -1,0 +1,38 @@
+---
+title: order_copy
+description: "Zaglavlje tabele za interne naloge kopiranja/prenosa. Koristi se u scenarijima kao što je prenos zaliha između lokacija. Odrazuje strukturu tabele order, ali s pojednostavljenim poljima napomena."
+---
+
+# `pnerp.order_copy`
+
+:::note[Modul]
+**Inventar / Magacin** — Zaglavlja internih naloga prenosa zaliha
+:::
+
+## Opis
+
+Zaglavlje tabele za interne naloge kopiranja/prenosa. Koristi se u scenarijima kao što je prenos zaliha između lokacija. Odrazuje strukturu tabele order, ali s pojednostavljenim poljima napomena.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| Year | year | NE |  | Kalendarska godina (MySQL YEAR tip) |
+| UnitID | smallint | NE |  | Izvorna organizaciona jedinica |
+| Order | mediumint | NE |  | Broj dokumenta |
+| CustomerID | mediumint | DA |  | Partner |
+| SubunitID / DepartmentID | smallint | DA |  | Podlokacija |
+| Date / ReceiptDate / DueDate | date | NE/DA |  | Ključni datumi |
+| AmountLessVAT / TaxBaseAmount / TaxAmoun / AmountWithVAT / DiscountAmount | double(14,2) | NE | 0.00 | Finansijski zbiri |
+| Reserved | smallint | DA |  | Zastavica rezervacije |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (Year, UnitID, Order, IsActive). Indeksi na CustomerID, SubunitID, DepartmentID, DueDate, Date.
+
+## Relacije
+
+Referencira unit, customer. Stavke su u orders_copy.
+

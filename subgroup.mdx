@@ -1,0 +1,36 @@
+---
+title: subgroup
+description: "Čuva podkategorije koje pripadaju nadređenoj grupi. Omogućava dvostepenu hijerarhijsku klasifikaciju proizvoda."
+---
+
+# `pnerp.subgroup`
+
+:::note[Modul]
+**Inventar / Upravljanje proizvodima** — Drugi nivo klasifikacije proizvoda
+:::
+
+## Opis
+
+Čuva podkategorije koje pripadaju nadređenoj grupi. Omogućava dvostepenu hijerarhijsku klasifikaciju proizvoda.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| GroupID | smallint | NE |  | 🔗 SV → `group`; nadređena grupa |
+| Name | varchar(70) | NE |  | Naziv podgrupe; jedinstven po grupi kada je aktivan |
+| CreatedBy | mediumint | NE |  | Revizija |
+| UpdatedBy | mediumint | DA |  | Revizija |
+| CreatedAt | timestamp | NE | CURRENT_TIMESTAMP |  |
+| UpdatedAt | timestamp | DA |  |  |
+| IsActive | tinyint | DA | 1 | Meko brisanje |
+
+## Indeksi
+
+Jedinstven na (GroupID, Name, IsActive); indeks na Name.
+
+## Relacije
+
+SV → group.GroupID. Referencira ga product.SubgroupID.
+

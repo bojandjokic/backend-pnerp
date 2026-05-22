@@ -1,0 +1,30 @@
+---
+title: obligated_vat
+description: "Šifarnik vrsta PDV obaveze (npr. obveznik, nije obveznik, djelimično odbitno), koji se koristi u zapisima kontnog plana."
+---
+
+# `pnerp.obligated_vat`
+
+:::note[Modul]
+**Porez / Računovodstvo** — Klasifikacija PDV obaveze
+:::
+
+## Opis
+
+Šifarnik vrsta PDV obaveze (npr. obveznik, nije obveznik, djelimično odbitno), koji se koristi u zapisima kontnog plana.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(20) | NE |  | Naziv vrste obaveze |
+
+## Indeksi
+
+Indeks na Name.
+
+## Relacije
+
+Referencira ga oldaccount.ObligatedVATID.
+

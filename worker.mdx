@@ -1,0 +1,32 @@
+---
+title: worker
+description: "Osnovni matični podaci zaposlenika/radnika s imenom i datumom rođenja. Minimalan zapis za referenciranje u obračunu plaća i radnim nalozima."
+---
+
+# `pnerp.worker`
+
+:::note[Modul]
+**HR / Proizvodnja** — Matični podaci zaposlenika/radnika
+:::
+
+## Opis
+
+Osnovni matični podaci zaposlenika/radnika s imenom i datumom rođenja. Minimalan zapis za referenciranje u obračunu plaća i radnim nalozima.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| Name / Surname | varchar(30) | NE |  | Ime i prezime |
+| BirthDate | date | NE |  | Datum rođenja |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Referenciraju ga tabele vezane za obračun plaća.
+

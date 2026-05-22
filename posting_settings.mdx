@@ -1,0 +1,32 @@
+---
+title: posting_settings
+description: "Definiše mapiranja polja za mehanizam knjiženja. Mapira prikazne nazive polja tabele na stvarna imena kolona baze podataka za evaluaciju formula."
+---
+
+# `pnerp.posting_settings`
+
+:::note[Modul]
+**Računovodstvo / Sistem** — Mapiranje naziva polja za mehanizam formula knjiženja
+:::
+
+## Opis
+
+Definiše mapiranja polja za mehanizam knjiženja. Mapira prikazne nazive polja tabele na stvarna imena kolona baze podataka za evaluaciju formula.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE | AUTO | 🔑 Primarni ključ |
+| TableID | tinyint | NE |  | Identifikator izvorne tabele |
+| Field | varchar(45) | NE |  | Prikazni naziv polja; jedinstven po tabeli |
+| FieldRaw | varchar(45) | NE |  | Stvarni naziv kolone baze podataka; jedinstven po tabeli |
+
+## Indeksi
+
+Jedinstven na (TableID, Field) i (TableID, FieldRaw). Indeksi na Field, FieldRaw.
+
+## Relacije
+
+Podržava evaluaciju formula u posting_protocol.
+

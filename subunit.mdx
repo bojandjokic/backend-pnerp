@@ -1,0 +1,33 @@
+---
+title: subunit
+description: "Podlokacije ili odjeljenja unutar organizacione jedinice, npr. specifične zone unutar magacina ili podkancelarije poslovnice."
+---
+
+# `pnerp.subunit`
+
+:::note[Modul]
+**Organizacija** — Matični podaci podlokacija unutar organizacione jedinice
+:::
+
+## Opis
+
+Podlokacije ili odjeljenja unutar organizacione jedinice, npr. specifične zone unutar magacina ili podkancelarije poslovnice.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| UnitID | smallint | NE |  | Nadređena organizaciona jedinica |
+| Name | varchar(70) | NE |  | Jedinstven po jedinici kada je aktivan |
+| Address / CityID / Phone1 / Phone2 / Email | razno | DA |  | Kontakt podaci |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (UnitID, Name, IsActive). Indeks na CityID.
+
+## Relacije
+
+Referenciraju ga order, invoice, stock, protocol.
+

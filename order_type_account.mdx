@@ -1,0 +1,35 @@
+---
+title: order_type_account
+description: "Mapira kombinacije entitet + vrsta jedinice + vrsta naloga + vrsta proizvoda na vrste protokola knjiženja za automatizaciju računovodstva. Koristi se tokom automatskog generisanja temeljnice."
+---
+
+# `pnerp.order_type_account`
+
+:::note[Modul]
+**Računovodstvo / Finansije** — Dodjela računovodstvenog protokola vrstama naloga
+:::
+
+## Opis
+
+Mapira kombinacije entitet + vrsta jedinice + vrsta naloga + vrsta proizvoda na vrste protokola knjiženja za automatizaciju računovodstva. Koristi se tokom automatskog generisanja temeljnice.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| EntityID | tinyint | NE |  | Pravni entitet |
+| OrderTypeID | tinyint | NE |  | 🔗 SV → `order_type` |
+| UnitTypeID | tinyint | NE |  | 🔗 SV → `unit_type` |
+| ProductTypeID | tinyint | NE |  | 🔗 SV → `product_type` |
+| ProtocolTypeID | smallint | NE |  | 🔗 SV → `protocol_type` |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (EntityID, UnitTypeID, OrderTypeID, ProductTypeID, IsActive).
+
+## Relacije
+
+Referencira order_type, unit_type, product_type, protocol_type.
+

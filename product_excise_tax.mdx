@@ -1,0 +1,34 @@
+---
+title: product_excise_tax
+description: "Čuva detalje akcize po proizvodu, uključujući zapreminu pakovanja i procenat alkohola koji se koristi za obračun akciznih dažbina."
+---
+
+# `pnerp.product_excise_tax`
+
+:::note[Modul]
+**Porez / Finansije** — Podaci za obračun akcize po proizvodu
+:::
+
+## Opis
+
+Čuva detalje akcize po proizvodu, uključujući zapreminu pakovanja i procenat alkohola koji se koristi za obračun akciznih dažbina.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | mediumint | NE | AUTO | 🔑 Primarni ključ |
+| ProductID | mediumint | NE |  | 🔗 SV → `product` |
+| ExciseTaxID | tinyint | NE |  | 🔗 SV → `kategorija` akcize |
+| Packaging | float(6,2) | DA |  | Zapremina pakovanja (npr. litri) |
+| PercentageAlcohol | float(5,2) | DA |  | Zamjenski procenat alkohola |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Indeksi na ProductID, ExciseTaxID, IsActive.
+
+## Relacije
+
+Referencira product i kategoriju akcize.
+

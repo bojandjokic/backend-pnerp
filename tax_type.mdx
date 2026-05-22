@@ -1,0 +1,31 @@
+---
+title: tax_type
+description: "Kategoriše različite vrste poreza radi klasifikacije i izvještavanja."
+---
+
+# `pnerp.tax_type`
+
+:::note[Modul]
+**Porez / Finansije** — Klasifikacija kategorija poreza
+:::
+
+## Opis
+
+Kategoriše različite vrste poreza radi klasifikacije i izvještavanja.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(30) | NE |  | Naziv kategorije |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Vjerovatno ga referenciraju zapisi u tabeli tax ili protocol.
+

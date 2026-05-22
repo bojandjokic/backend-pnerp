@@ -1,0 +1,38 @@
+---
+title: order_costs
+description: "Čuva dodatne troškove (prevoz, carina, itd.) vezane za nabavni nalog. Podržava tretman PDV-a i praćenje odbitnosti po stavci troška."
+---
+
+# `pnerp.order_costs`
+
+:::note[Modul]
+**Nabava / Finansije** — Zavisni/dodatni troškovi po nalogu
+:::
+
+## Opis
+
+Čuva dodatne troškove (prevoz, carina, itd.) vezane za nabavni nalog. Podržava tretman PDV-a i praćenje odbitnosti po stavci troška.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | mediumint | NE | AUTO | 🔑 Primarni ključ |
+| OrderID | int | NE |  | 🔗 SV → `zaglavlje` naloga |
+| CostID | smallint | NE |  | 🔗 SV → `vrsta` troška |
+| CustomerID | mediumint | NE |  | Dobavljač koji pruža ovaj trošak |
+| InvoiceNo | varchar(45) | DA |  | Referenca fakture dobavljača |
+| TaxBaseAmount | double(9,2) | DA |  | Osnovica PDV-a troška |
+| TaxAmoun | double(9,2) | DA |  | PDV na trošak |
+| TaxNoDuction | double(9,2) | DA |  | Neodbitni iznos PDV-a |
+| Amount | double(9,2) | NE |  | Ukupan iznos troška |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (OrderID, CostID, CustomerID, IsActive).
+
+## Relacije
+
+Referencira order, customer.
+

@@ -1,0 +1,34 @@
+---
+title: protocols
+description: "Stavke temeljnice (dugovna/potražna knjiženja) generisane iz zaglavlja protokola. Svaki red predstavlja jedno knjiženje konta s vrijednošću."
+---
+
+# `pnerp.protocols`
+
+:::note[Modul]
+**Računovodstvo / Finansije** — Stavke dvojnog računovodstvenog knjiženja
+:::
+
+## Opis
+
+Stavke temeljnice (dugovna/potražna knjiženja) generisane iz zaglavlja protokola. Svaki red predstavlja jedno knjiženje konta s vrijednošću.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| ProtocolID | int | NE |  | 🔗 SV → `zaglavlje` protocol |
+| ProtocolAccountsID | mediumint | NE |  | 🔗 SV → `protocol_accounts` (konfiguracija stavke konta) |
+| ProtocolAccountsTypeID | smallint | NE |  | 🔗 SV → `protocol_accounts_type` |
+| Value | double(14,2) | NE |  | Iznos knjiženja |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Indeksi na ProtocolID, ProtocolAccountsID, ProtocolAccountsTypeID.
+
+## Relacije
+
+Referencira zaglavlje protocol, protocol_accounts, protocol_accounts_type.
+

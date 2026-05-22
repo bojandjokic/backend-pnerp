@@ -1,0 +1,46 @@
+---
+title: orders
+description: "Tabela stavki za zaglavlje naloga. Svaki red predstavlja jednu stavku proizvoda na komercijalnom dokumentu. Sadrži količine, cijene na više nivoa (fakturna, nabavna, prodajna), PDV detalje, rabat, mar"
+---
+
+# `pnerp.orders`
+
+:::note[Modul]
+**Prodaja / Nabava** — Stavke naloga/dokumenata
+:::
+
+## Opis
+
+Tabela stavki za zaglavlje naloga. Svaki red predstavlja jednu stavku proizvoda na komercijalnom dokumentu. Sadrži količine, cijene na više nivoa (fakturna, nabavna, prodajna), PDV detalje, rabat, maržu i polja za više valuta.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| OrderID | int | NE |  | 🔗 SV → `zaglavlje` naloga |
+| OrdinalNumber | smallint | NE |  | Redni broj stavke |
+| ProductID | mediumint | DA |  | 🔗 SV → `product` |
+| Description | varchar(100) | DA |  | Opis stavke (zamjena naziva) |
+| Qty | double(12,5) | DA |  | Količina |
+| InvoicePrice / InvoiceAmount | double | DA |  | Fakturna cijena/iznos |
+| DiscountRate / DiscountAmount | float/double | DA |  | Stopa i iznos rabata |
+| VAT | tinyint | DA |  | Primijenjena stopa PDV-a |
+| PurchasePrice / PurchaseAmount | double | DA |  | Podaci o nabavnoj cijeni |
+| MarginRate / MarginAmount | float/double | DA |  | Stopa i iznos marže |
+| TaxRate / TaxAmoun | float/double | DA |  | Stopa i iznos PDV-a (TaxAmoun = greška u nazivu) |
+| AmountWithVAT / AmountLessVAT / TaxBaseAmount | double | NE/DA |  | Zbiri iznosa |
+| *Currency polja | double | DA |  | Sva polja cijena/iznosa ponovljena u stranoj valuti |
+| CurrencyValue | double(12,6) | DA |  | Kursna vrijednost na nivou stavke |
+| UnitOfMeasurementID | tinyint | DA |  | Zamjena jedinice mjere na stavki |
+| IsCancelled / CancelledID | tinyint/int | DA |  | Podaci o storniranju |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (OrderID, OrdinalNumber, IsActive). Indeksi na ProductID, OrdinalNumber, UnitOfMeasurementID, PredispositionOrderID.
+
+## Relacije
+
+Referencira zaglavlje naloga (OrderID), product, unit_of_measurement. Ima AFTER INSERT/UPDATE trigere koji ažuriraju zbire zaglavlja i zalihe.
+

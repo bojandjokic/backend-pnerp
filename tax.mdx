@@ -1,0 +1,33 @@
+---
+title: tax
+description: "Šifarnik stopa PDV-a. Svaki zapis definiše naziv stope, njen postotak i kratki karakter oznake koji se koristi u izvještavanju."
+---
+
+# `pnerp.tax`
+
+:::note[Modul]
+**Porez / Finansije** — Matični podaci stopa PDV-a
+:::
+
+## Opis
+
+Šifarnik stopa PDV-a. Svaki zapis definiše naziv stope, njen postotak i kratki karakter oznake koji se koristi u izvještavanju.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(20) | NE |  | Naziv stope, npr. 'Standardna 17%' |
+| Percentage | float(6,2) | NE |  | Vrijednost stope PDV-a |
+| Tag | char(1) | DA |  | Jednoslovna oznaka za izvještaje |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Referencira ga product.TaxID i invoices/orders.VAT.
+

@@ -1,0 +1,38 @@
+---
+title: order_type
+description: "Definiše vrste komercijalnih dokumenata i njihovo ponašanje. Kontroliše smjer ulaza/izlaza zaliha, smjer iznosa (faktor), dozvolu izmjene cijene, obavezu kupca i redoslijed prikaza. Samo-referenciranj"
+---
+
+# `pnerp.order_type`
+
+:::note[Modul]
+**Konfiguracija sistema** — Konfiguracija i kontrola ponašanja vrsta dokumenata
+:::
+
+## Opis
+
+Definiše vrste komercijalnih dokumenata i njihovo ponašanje. Kontroliše smjer ulaza/izlaza zaliha, smjer iznosa (faktor), dozvolu izmjene cijene, obavezu kupca i redoslijed prikaza. Samo-referenciranje za podršku srodnim vrstama dokumenata.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE |  | 🔑 Primarni ključ (ručni unos) |
+| Name | varchar(40) | NE |  | Jedinstven naziv vrste |
+| Factor | tinyint | NE |  | Faktor predznaka iznosa (+1/-1) |
+| EntryQty / ExitQty | tinyint | NE |  | Zastavice ulaza/izlaza zaliha |
+| EntryAmoun / ExitAmoun | tinyint | NE |  | Smjer knjiženja iznosa (greška u nazivu) |
+| ChangePrice | tinyint | NE |  | Zastavica dozvole izmjene cijene |
+| OrderTypeID | tinyint | DA |  | Nadređena/srodna vrsta naloga (samo-ref.) |
+| Forbidden | tinyint | NE |  | Zastavica zabrane/onemogućavanja |
+| CustomerRequired | tinyint | NE |  | Obavezno odabiranje kupca |
+| Sort | tinyint | NE |  | Redoslijed prikaza |
+
+## Indeksi
+
+Jedinstven na Name; indeksi na Sort, OrderTypeID.
+
+## Relacije
+
+Samo-referenciranje na OrderTypeID. Referenciraju ga order, invoice, product_account_group, order_type_account.
+

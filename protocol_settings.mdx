@@ -1,0 +1,36 @@
+---
+title: protocol_settings
+description: "Podešavanja korisničkog interfejsa i validacije po entitetu i vrsti protokola. Kontroliše koja polja su vidljiva i obavezna u formi za unos temeljnice, s mogućim nadjačavanjem po kompaniji/korisniku."
+---
+
+# `pnerp.protocol_settings`
+
+:::note[Modul]
+**Računovodstvo / Konfiguracija sistema** — Pravila vidljivosti i validacije forme protokola
+:::
+
+## Opis
+
+Podešavanja korisničkog interfejsa i validacije po entitetu i vrsti protokola. Kontroliše koja polja su vidljiva i obavezna u formi za unos temeljnice, s mogućim nadjačavanjem po kompaniji/korisniku.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| EntityID | tinyint | NE |  | Pravni entitet |
+| ProtocolTypeID | smallint | NE |  | 🔗 SV → `protocol_type` |
+| CompanyID / UserID | smallint/mediumint | DA |  | Opciono nadjačavanje po kompaniji/korisniku |
+| DueDate / InvoiceNo / ImportNo / Description / Customer / Unit / Entity (+ Required varijante) | tinyint | DA |  | Zastavice prikaza/obaveze za svako polje forme |
+| BookForeignSuppliers | tinyint | DA |  | Aktiviraj opciju knjige stranih dobavljača |
+| ProtocolAddition | tinyint | DA |  | Dozvoli ručne dopunske stavke |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Kompozitni indeks na (EntityID, ProtocolTypeID, CompanyID, UserID, IsActive).
+
+## Relacije
+
+Referencira protocol_type.
+

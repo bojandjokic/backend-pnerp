@@ -1,0 +1,33 @@
+---
+title: protocol_account
+description: "Vezuje entitet i vrstu protokola za vrstu konta, kontrolišući koja konta se pojavljuju u podešavanju temeljnice."
+---
+
+# `pnerp.protocol_account`
+
+:::note[Modul]
+**Računovodstvo** — Dodjela vrste konta po vrsti protokola
+:::
+
+## Opis
+
+Vezuje entitet i vrstu protokola za vrstu konta, kontrolišući koja konta se pojavljuju u podešavanju temeljnice.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | mediumint | NE | AUTO | 🔑 Primarni ključ |
+| EntityID | tinyint | NE |  | Pravni entitet |
+| ProtocolTypeID | smallint | NE |  | 🔗 SV → `protocol_type` |
+| AccountTypeID | smallint | NE |  | 🔗 SV → `vrsta` konta |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Indeksi na ProtocolTypeID, EntityID, IsActive.
+
+## Relacije
+
+Referencira protocol_type. U protocol_accounts se nalaze podređeni zapisi.
+

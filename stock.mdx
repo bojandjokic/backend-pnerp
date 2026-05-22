@@ -1,0 +1,43 @@
+---
+title: stock
+description: "Prati količine i vrijednosti zaliha po godini, organizacionoj jedinici i proizvodu. Čuva odvojene ulazne/izlazne količine i cijene na nivou fakturne, nabavne i prodajne cijene. Centralna tabela za izv"
+---
+
+# `pnerp.stock`
+
+:::note[Modul]
+**Inventar / Magacin** — Tekuće i historijsko stanje zaliha po jedinici/proizvodu/godini
+:::
+
+## Opis
+
+Prati količine i vrijednosti zaliha po godini, organizacionoj jedinici i proizvodu. Čuva odvojene ulazne/izlazne količine i cijene na nivou fakturne, nabavne i prodajne cijene. Centralna tabela za izvještavanje o stanju zaliha.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| Year | tinyint | DA |  | Fiskalna godina (offset, npr. 25 = 2025) |
+| UnitID | smallint | NE |  | 🔗 SV → `unit` (magacin/prodavnica) |
+| ProductID | mediumint | NE |  | 🔗 SV → `product` |
+| ReservedQty | double(9,3) | DA |  | Količina rezervisana za otvorene naloge |
+| QtyEntry | double(9,3) | DA |  | Ukupna primljena količina |
+| QtyOutput | double(9,3) | DA |  | Ukupna izdata količina |
+| InvoiceEntry/Output/Price | double | DA |  | Iznosi na nivou fakturne cijene |
+| PurchaseEntry/Output/Price | double | DA |  | Iznosi na nivou nabavne/troškovna cijene |
+| SellingEntry/Output/Price | double | DA |  | Iznosi na nivou prodajne cijene |
+| MinimumStock | double(9,3) | DA |  | Prag za narudžbu (reorder) |
+| MaximumStock | double(9,3) | DA |  | Maksimalni nivo zaliha |
+| SubunitID | smallint | DA |  | 🔗 SV → `subunit` |
+| DepartmentID | smallint | DA |  | 🔗 SV → `department` |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (Year, UnitID, ProductID, IsActive). Indeksi na UnitID, ProductID, SubunitID, DepartmentID.
+
+## Relacije
+
+Referencira unit, product. Ažuriraju ga trigeri na orders i invoices.
+

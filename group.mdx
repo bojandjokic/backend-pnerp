@@ -1,0 +1,36 @@
+---
+title: group
+description: "Čuva grupe proizvoda ili organizacione grupe po kompaniji. Koristi se za kategorizaciju proizvoda u imenovane grupe, omogućavajući hijerarhijsku klasifikaciju stavki inventara."
+---
+
+# `pnerp.group`
+
+:::note[Modul]
+**Inventar / Upravljanje proizvodima** — Matični podaci o grupama proizvoda
+:::
+
+## Opis
+
+Čuva grupe proizvoda ili organizacione grupe po kompaniji. Koristi se za kategorizaciju proizvoda u imenovane grupe, omogućavajući hijerarhijsku klasifikaciju stavki inventara.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ, automatski generisan |
+| CompanyID | smallint | NE |  | 🔗 SV → `company`; vezuje grupu za kompaniju |
+| Name | varchar(70) | NE |  | Naziv grupe; jedinstven po kompaniji kada je aktivan |
+| CreatedBy | mediumint | NE |  | 🔗 SV → `user`; polje revizije |
+| UpdatedBy | mediumint | DA |  | 🔗 SV → `user`; polje revizije |
+| CreatedAt | timestamp | NE | CURRENT_TIMESTAMP | Datum i vrijeme kreiranja zapisa |
+| UpdatedAt | timestamp | DA |  | Datum i vrijeme posljednje izmjene |
+| IsActive | tinyint | DA | 1 | Zastavica mekog brisanja |
+
+## Indeksi
+
+Jedinstven indeks na (CompanyID, Name, IsActive); indeks na Name.
+
+## Relacije
+
+Referencira company (CompanyID). Referenciraju ga product (GroupID) i subgroup (GroupID).
+

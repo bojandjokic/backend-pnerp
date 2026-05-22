@@ -1,0 +1,37 @@
+---
+title: orders_copy
+description: "Stavke za zaglavlje internog naloga kopiranja/prenosa (order_copy)."
+---
+
+# `pnerp.orders_copy`
+
+:::note[Modul]
+**Inventar / Magacin** — Stavke internog naloga prenosa zaliha
+:::
+
+## Opis
+
+Stavke za zaglavlje internog naloga kopiranja/prenosa (order_copy).
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| OrderID | int | NE |  | 🔗 SV → `zaglavlje` order_copy |
+| OrdinalNumber | smallint | NE |  | Redni broj stavke |
+| ProductID | mediumint | DA |  | 🔗 SV → `product` |
+| Description | varchar(100) | DA |  | Opis stavke |
+| UnitOfMeasurementID | tinyint | DA |  | Jedinica mjere |
+| Qty | double(10,3) | NE |  | Količina |
+| UnitPrice / DiscountRate / TaxRate / AmountWithVAT itd. | double/float | NE/DA |  | Polja cijena i iznosa |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (OrderID, OrdinalNumber, IsActive). Indeksi na ProductID, UnitOfMeasurementID.
+
+## Relacije
+
+Referencira order_copy, product.
+

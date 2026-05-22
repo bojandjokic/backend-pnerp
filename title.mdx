@@ -1,0 +1,35 @@
+---
+title: title
+description: "Čuva predloške naslova dokumenata na više jezika s praćenjem podrazumijevanog odabira i broja upotreba."
+---
+
+# `pnerp.title`
+
+:::note[Modul]
+**Dokumenti / Lokalizacija** — Višejezični predlošci naslova dokumenata
+:::
+
+## Opis
+
+Čuva predloške naslova dokumenata na više jezika s praćenjem podrazumijevanog odabira i broja upotreba.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(70) | NE |  | Identifikacioni naziv predloška |
+| Title | varchar(60) | NE |  | Stvarni tekst naslova |
+| Language | varchar(10) | NE |  | Jezička šifra, npr. bs, sr, en |
+| CheckedDefault | tinyint | NE | 0 | Podrazumijevani odabir |
+| NumberOfRepeats | mediumint | NE | 0 | Brojač upotreba |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Nema SV; koristi ga generisanje dokumenata kao šifarnik.
+

@@ -1,0 +1,31 @@
+---
+title: transaction
+description: "Definiše transakcije/module aplikacije (imenovane akcije ili ekrane). Koristi se kao atomarna jedinica dodjele dozvola."
+---
+
+# `pnerp.transaction`
+
+:::note[Modul]
+**Bezbjednost** — Matični podaci transakcija/funkcionalnosti aplikacije
+:::
+
+## Opis
+
+Definiše transakcije/module aplikacije (imenovane akcije ili ekrane). Koristi se kao atomarna jedinica dodjele dozvola.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(60) | NE |  | Jedinstven naziv transakcije |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na Name. Indeks na IsActive.
+
+## Relacije
+
+Vezan za uloge putem role_transaction. Vezan za dozvole putem transaction_permission.
+

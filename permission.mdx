@@ -1,0 +1,31 @@
+---
+title: permission
+description: "Definiše granularne dozvole (npr. čitanje, pisanje, brisanje) koje se mogu vezati za transakcije."
+---
+
+# `pnerp.permission`
+
+:::note[Modul]
+**Bezbjednost** — Matični podaci dozvola (kontrola pristupa na CRUD nivou)
+:::
+
+## Opis
+
+Definiše granularne dozvole (npr. čitanje, pisanje, brisanje) koje se mogu vezati za transakcije.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(60) | NE |  | Jedinstven naziv dozvole |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na Name. Indeks na IsActive.
+
+## Relacije
+
+Vezana za transakcije putem transaction_permission.
+

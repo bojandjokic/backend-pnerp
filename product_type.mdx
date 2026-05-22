@@ -1,0 +1,33 @@
+---
+title: product_type
+description: "Šifarnik vrsta proizvoda (npr. roba, usluge, sirovine). Kontroliše da li se primjenjuje praćenje zaliha i zastavice usluga."
+---
+
+# `pnerp.product_type`
+
+:::note[Modul]
+**Inventar / Upravljanje proizvodima** — Klasifikacija ponašanja proizvoda (zalihe vs usluge)
+:::
+
+## Opis
+
+Šifarnik vrsta proizvoda (npr. roba, usluge, sirovine). Kontroliše da li se primjenjuje praćenje zaliha i zastavice usluga.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(50) | NE |  | Jedinstven naziv vrste |
+| Stock | tinyint | NE |  | 1 = učestvuje u prometu zaliha |
+| Service | tinyint | DA |  | 1 = uslužni proizvod |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na Name; indeks na IsActive.
+
+## Relacije
+
+Referencira ga product.ProductTypeID.
+

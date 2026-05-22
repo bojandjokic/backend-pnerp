@@ -1,0 +1,30 @@
+---
+title: transaction_permission
+description: "Veza više-prema-više koja vezuje specifične dozvole za transakcije."
+---
+
+# `pnerp.transaction_permission`
+
+:::note[Modul]
+**Bezbjednost** — Dodjela dozvola po transakciji
+:::
+
+## Opis
+
+Veza više-prema-više koja vezuje specifične dozvole za transakcije.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| TransactionID | smallint | NE |  | 🔗 SV → `transaction`; kompozitni PK |
+| PermissionID | smallint | NE |  | 🔗 SV → `permission`; kompozitni PK |
+
+## Indeksi
+
+Kompozitni PK. Indeks na PermissionID.
+
+## Relacije
+
+SV → transaction, permission.
+

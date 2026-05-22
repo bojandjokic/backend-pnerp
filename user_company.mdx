@@ -1,0 +1,30 @@
+---
+title: user_company
+description: "Veza više-prema-više koja definiše kojim kompanijama korisnik ima pristup."
+---
+
+# `pnerp.user_company`
+
+:::note[Modul]
+**Bezbjednost** — Kontrola pristupa korisnika kompanijama
+:::
+
+## Opis
+
+Veza više-prema-više koja definiše kojim kompanijama korisnik ima pristup.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| UserID | mediumint | NE |  | 🔗 SV → `user` |
+| CompanyID | smallint | NE |  | 🔗 SV → `company` |
+
+## Indeksi
+
+Kompozitni PK. Indeks na CompanyID.
+
+## Relacije
+
+SV → user, company.
+

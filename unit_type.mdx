@@ -1,0 +1,35 @@
+---
+title: unit_type
+description: "Definiše tip i zastavice ponašanja organizacionih jedinica. Kontroliše status PDV registracije, upravljanje zalihama, ponašanje nabave i da li se primjenjuje prosječno cijenjenje."
+---
+
+# `pnerp.unit_type`
+
+:::note[Modul]
+**Konfiguracija sistema** — Konfiguracija vrste jedinice (PDV, zalihe, zastavice nabave)
+:::
+
+## Opis
+
+Definiše tip i zastavice ponašanja organizacionih jedinica. Kontroliše status PDV registracije, upravljanje zalihama, ponašanje nabave i da li se primjenjuje prosječno cijenjenje.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE |  | Ručni primarni ključ |
+| Name | varchar(30) | DA |  | Jedinstven naziv vrste |
+| VAT | tinyint | NE |  | Jedinica je PDV obveznik |
+| Average | tinyint | NE |  | Koristiti prosječno obračunavanje troškova |
+| Stock | tinyint | NE |  | Učestvuje u kontroli zaliha |
+| Purchase | tinyint | NE |  | Može vršiti nabavke |
+| Abbreviation | varchar(3) | DA |  | Kratka oznaka |
+
+## Indeksi
+
+Jedinstven na Name. Indeksi na VAT, Stock, Purchase.
+
+## Relacije
+
+Referenciraju ga unit.UnitTypeID i UnitTypePurchaseID, order_type_account.UnitTypeID.
+

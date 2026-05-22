@@ -1,0 +1,37 @@
+---
+title: unit_of_measurement
+description: "Šifarnik jedinica mjere (kg, litar, komad, itd.) sa faktorima konverzije za međusobnu upotrebu jedinica."
+---
+
+# `pnerp.unit_of_measurement`
+
+:::note[Modul]
+**Inventar / Sistem** — Matični podaci jedinica mjere s podrškom za konverziju
+:::
+
+## Opis
+
+Šifarnik jedinica mjere (kg, litar, komad, itd.) sa faktorima konverzije za međusobnu upotrebu jedinica.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(20) | NE |  | Jedinstven po IsActive |
+| Symbol | varchar(3) | NE |  | Kratki simbol, npr. kg |
+| SymbolEN | varchar(3) | DA |  | Engleski simbol |
+| Entity | varchar(20) | DA |  | Primjenjivi entitet |
+| BasicUnitID | tinyint | DA |  | Osnovna jedinica za konverziju (samo-referenciranje) |
+| ConversionFactor | double(9,6) | DA |  | Množilac za konverziju u osnovnu jedinicu |
+| Description | varchar(100) | DA |  |  |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (Name, IsActive) i (Symbol, IsActive); indeks na BasicUnitID.
+
+## Relacije
+
+Samo-referenciranje putem BasicUnitID. Referenciraju ga product, orders, invoices, orders_copy.
+

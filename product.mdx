@@ -1,0 +1,49 @@
+---
+title: product
+description: "Centralna matična tabela proizvoda/artikala. Sadrži sve informacije o robama i uslugama koje kompanija prodaje ili nabavlja, uključujući klasifikaciju, poresku kategoriju, detalje pakovanja i referenc"
+---
+
+# `pnerp.product`
+
+:::note[Modul]
+**Inventar / Upravljanje proizvodima** — Matični katalog svih proizvoda i usluga
+:::
+
+## Opis
+
+Centralna matična tabela proizvoda/artikala. Sadrži sve informacije o robama i uslugama koje kompanija prodaje ili nabavlja, uključujući klasifikaciju, poresku kategoriju, detalje pakovanja i reference dobavljača.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | mediumint | NE | AUTO | 🔑 Primarni ključ |
+| CompanyID | smallint | NE |  | Vezuje proizvod za kompaniju |
+| Code | mediumint | NE |  | Interni šifar; jedinstven po kompaniji |
+| OldCode | mediumint | DA |  | Legacy šifar za migraciju podataka |
+| Name | varchar(255) | NE |  | Naziv proizvoda |
+| NameEN | varchar(255) | DA |  | Naziv na engleskom jeziku |
+| UnitOfMeasurementID | tinyint | NE |  | 🔗 SV → `unit_of_measurement` |
+| Package | smallint | DA |  | Količina u pakovanju |
+| PercentageAlcohol | float(2,2) | DA |  | Procenat alkohola za akcizu |
+| ProductTypeID | tinyint | NE |  | 🔗 SV → `product_type` |
+| ManufacturerID | mediumint | DA |  | 🔗 SV → `customer`/proizvođač |
+| ImporterID | mediumint | DA |  | 🔗 SV → `customer`/uvoznik |
+| Measurement | tinyint | NE |  | Zastavica za mjerenje |
+| TaxID | tinyint | NE |  | 🔗 SV → `tax`; stopa PDV-a |
+| ExciseTaxID | tinyint | DA |  | 🔗 SV → `kategorija` akcize |
+| GroupID | smallint | DA |  | 🔗 SV → `group` |
+| SubgroupID | smallint | DA |  | 🔗 SV → `subgroup` |
+| ProductAccountGroupID | smallint | DA |  | 🔗 SV → `product_account_group` |
+| Note | varchar(255) | DA |  | Kratka napomena |
+| Description | longtext | DA |  | Puni opis / HTML sadržaj |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (CompanyID, Code, IsActive). Indeksi na Name, GroupID, SubgroupID, TaxID, ProductTypeID, ManufacturerID, ImporterID, ExciseTaxID, UnitOfMeasurementID, ProductAccountGroupID.
+
+## Relacije
+
+Referencira unit_of_measurement, product_type, tax, group, subgroup, product_account_group. Referenciraju ga orders, invoices, stock, work_order, standard_materials, product_excise_tax.
+

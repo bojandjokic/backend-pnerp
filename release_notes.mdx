@@ -1,0 +1,34 @@
+---
+title: release_notes
+description: "Pojedinačne stavke promjena unutar bilješke o verziji. Svaka stavka ima vrstu problema (greška, funkcionalnost, poboljšanje) i opis."
+---
+
+# `pnerp.release_notes`
+
+:::note[Modul]
+**Sistem** — Stavke bilješki o verziji po vrsti problema
+:::
+
+## Opis
+
+Pojedinačne stavke promjena unutar bilješke o verziji. Svaka stavka ima vrstu problema (greška, funkcionalnost, poboljšanje) i opis.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| OrderID | mediumint | NE |  | 🔗 SV → `zaglavlje` release_note |
+| OrdinalNumber | smallint | NE |  | Redni broj stavke |
+| IssueTypeID | smallint | NE |  | 🔗 SV → `issue_type` |
+| Note | longtext | DA |  | Opis promjene |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (OrderID, OrdinalNumber, IsActive). Indeksi na IssueTypeID.
+
+## Relacije
+
+Referencira release_note, issue_type.
+

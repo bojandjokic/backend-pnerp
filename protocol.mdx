@@ -1,0 +1,44 @@
+---
+title: protocol
+description: "Zaglavlje za računovodstvene temeljnice/naloge. Podržava ručna i automatizovana knjiženja. Sadrži 20 konfigurabilnih polja iznosa (Amount0–Amount19) za fleksibilno generisanje temeljnice zasnovano na "
+---
+
+# `pnerp.protocol`
+
+:::note[Modul]
+**Računovodstvo / Finansije** — Zaglavlje računovodstvene temeljnice/naloga
+:::
+
+## Opis
+
+Zaglavlje za računovodstvene temeljnice/naloge. Podržava ručna i automatizovana knjiženja. Sadrži 20 konfigurabilnih polja iznosa (Amount0–Amount19) za fleksibilno generisanje temeljnice zasnovano na formulama. Čuva podatke o kupcu, jedinici, datumu PDV-a, referenci uvoza, valuti i statusu knjiženja.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| Year | tinyint | DA |  | Fiskalna godina |
+| CompanyID | smallint | NE |  | Kompanija |
+| ProtocolTypeID | smallint | NE |  | 🔗 SV → `protocol_type` |
+| OrdinalNumber | mediumint | NE |  | Redni broj temeljnice po godini/kompaniji/vrsti |
+| DateOfArrival / Date / DateVAT | date | NE |  | Datumi prijema, knjiženja i PDV-a |
+| DueDate | date | DA |  | Datum dospjeća plaćanja |
+| CustomerID | mediumint | DA |  | Kontrastrana |
+| UnitID / SubunitID / DepartmentID | smallint | DA |  | Organizaciona dimenzija |
+| CurrencyID / CurrencyValue | tinyint/double | DA |  | Strana valuta |
+| InvoiceNo / ImportNo | varchar(45) | DA |  | Vanjske reference |
+| Amount0–Amount19 | double(14,2) | DA |  | 20 konfigurabilnih mjesta iznosa |
+| IsPosted | tinyint | DA |  | Status knjiženja |
+| OrderID | int | DA |  | Referenca izvornog naloga |
+| EntityID | tinyint | DA |  | Pravni entitet |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (Year, CompanyID, ProtocolTypeID, OrdinalNumber, IsActive). Opsežni individualni indeksi na svim glavnim filterskim kolonama.
+
+## Relacije
+
+Referencira protocol_type, customer, unit. Stavke knjiženja su u protocols. Vezan za order.OrderID.
+

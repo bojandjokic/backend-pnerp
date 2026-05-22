@@ -1,0 +1,32 @@
+---
+title: invoice_type
+description: "Šifarnik koji razlikuje nabavne i prodajne vrste faktura (zastavica IsPurchase). Koristi se uz order_type za klasifikaciju fiskalnih vrsta dokumenata."
+---
+
+# `pnerp.invoice_type`
+
+:::note[Modul]
+**Finansije / Sistem** — Matični podaci vrsta faktura (prodajne vs nabavne)
+:::
+
+## Opis
+
+Šifarnik koji razlikuje nabavne i prodajne vrste faktura (zastavica IsPurchase). Koristi se uz order_type za klasifikaciju fiskalnih vrsta dokumenata.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE |  | Ručni primarni ključ |
+| Code | char(2) | NE |  | Kratka šifra |
+| Name | varchar(20) | DA |  | Opis vrste |
+| IsPurchase | tinyint | DA |  | 1 = nabavna; 0 = prodajna |
+
+## Indeksi
+
+Indeksi na Code, Name, IsPurchase.
+
+## Relacije
+
+Referencira ga oldaccount.InvoiceTypeID, protocol_type.
+

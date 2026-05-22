@@ -1,0 +1,34 @@
+---
+title: work_order_header
+description: "Zaglavlje za radne naloge za proizvodnju. Prati godinu, organizacionu jedinicu, datum, redni broj naloga, status knjiženja i opcioni opis proizvodnog ciklusa."
+---
+
+# `pnerp.work_order_header`
+
+:::note[Modul]
+**Proizvodnja** — Zaglavlja radnih naloga za proizvodnju
+:::
+
+## Opis
+
+Zaglavlje za radne naloge za proizvodnju. Prati godinu, organizacionu jedinicu, datum, redni broj naloga, status knjiženja i opcioni opis proizvodnog ciklusa.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| Year / UnitID / Order | tinyint/smallint/mediumint | NE |  | Identifikacija dokumenta |
+| Date | date | NE |  | Datum proizvodnje |
+| Description | text | DA |  | Opis proizvodnje |
+| IsPosted | tinyint | DA |  | Status računovodstvenog knjiženja |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (Year, UnitID, Order, IsActive). Indeksi na Order, UnitID, Date.
+
+## Relacije
+
+Stavke izlaza gotovih proizvoda u work_orders; stavke utroška materijala u work_order.
+

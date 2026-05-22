@@ -1,0 +1,34 @@
+---
+title: protocol_addition
+description: "Čuva dodatne ručne dugovna/potražne stavke vezane za protokol, dopuštajući dopunska knjiženja pored automatski generisanih stavki."
+---
+
+# `pnerp.protocol_addition`
+
+:::note[Modul]
+**Računovodstvo** — Ručne dopunske stavke temeljnice po protokolu
+:::
+
+## Opis
+
+Čuva dodatne ručne dugovna/potražne stavke vezane za protokol, dopuštajući dopunska knjiženja pored automatski generisanih stavki.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| ProtocolID | int | NE |  | 🔗 SV → `zaglavlje` protocol |
+| AccountID | smallint | NE |  | 🔗 SV → `konto` kontnog plana |
+| UnitID | smallint | DA |  | Mjerno mjesto / organizaciona jedinica |
+| Owe / Claim | double(14,2) | DA |  | Iznosi duguje i potražuje |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Indeksi na ProtocolID, AccountID, UnitID.
+
+## Relacije
+
+Referencira protocol, oldaccount.
+

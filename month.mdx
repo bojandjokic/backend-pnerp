@@ -1,0 +1,35 @@
+---
+title: month
+description: "Statički šifarnik kalendarskih mjeseci s nazivima na više jezika (srpska ćirilica, srpska latinica, hrvatski, engleski) i rimskim brojevima."
+---
+
+# `pnerp.month`
+
+:::note[Modul]
+**Sistem / Lokalizacija** — Šifarnik naziva mjeseci na više jezika
+:::
+
+## Opis
+
+Statički šifarnik kalendarskih mjeseci s nazivima na više jezika (srpska ćirilica, srpska latinica, hrvatski, engleski) i rimskim brojevima.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE |  | Ručni PK (1–12) |
+| Code | char(2) | NE |  | Dvozifreni kod, npr. '01' |
+| Name | varchar(10) | NE |  | Primarni naziv |
+| CyrillicName | varchar(10) | NE |  | Srpska ćirilica |
+| CroatianName | varchar(10) | NE |  | Hrvatski |
+| EnglishName | varchar(10) | NE |  | Engleski; jedinstven |
+| RomanNumbers | varchar(4) | NE |  | Rimski broj, npr. I, XII |
+
+## Indeksi
+
+Jedinstven na EnglishName.
+
+## Relacije
+
+Referenciraju ga protocol, processing_month, time_sheet.
+

@@ -1,0 +1,31 @@
+---
+title: purchase_invoice_type
+description: "Šifarnik podvrsta nabavnih faktura, mapiranih na nadređenu vrstu fakture. Koristi se u knjizi PDV-a i klasifikaciji vrsta protokola."
+---
+
+# `pnerp.purchase_invoice_type`
+
+:::note[Modul]
+**Finansije / Porez** — Klasifikacija podvrsta nabavnih faktura
+:::
+
+## Opis
+
+Šifarnik podvrsta nabavnih faktura, mapiranih na nadređenu vrstu fakture. Koristi se u knjizi PDV-a i klasifikaciji vrsta protokola.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE |  | Ručni primarni ključ |
+| InvoiceTypeID | tinyint | DA |  | 🔗 SV → `invoice_type` |
+| Name | varchar(80) | NE |  | Jedinstven naziv podvrste |
+
+## Indeksi
+
+Jedinstven na Name.
+
+## Relacije
+
+Referencira ga protocol_type.PurchaseInvoiceTypeID.
+

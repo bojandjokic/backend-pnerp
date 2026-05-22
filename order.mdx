@@ -1,0 +1,53 @@
+---
+title: order
+description: "Zaglavlje tabele za sve komercijalne dokumente — prodajne naloge, nabavne naloge, povratnice, itd. OrderTypeID određuje vrstu dokumenta. Sadrži potpune finansijske zbire, podatke o kupcu, valutu i pol"
+---
+
+# `pnerp.order`
+
+:::note[Modul]
+**Prodaja / Nabava / Finansije** — Zaglavlje komercijalnog dokumenta (prodajni/nabavni nalozi)
+:::
+
+## Opis
+
+Zaglavlje tabele za sve komercijalne dokumente — prodajne naloge, nabavne naloge, povratnice, itd. OrderTypeID određuje vrstu dokumenta. Sadrži potpune finansijske zbire, podatke o kupcu, valutu i polja za fiskalnu usklađenost (InvoiceNumber, VerificationUrl za e-fakturisanje).
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| Year | tinyint | DA |  | Offset fiskalne godine |
+| UnitID | smallint | NE |  | Organizaciona jedinica koja izdaje dokument |
+| UnitPredispositionID | smallint | NE | 0 | Jedinica predispozicije (0 = nema) |
+| OrderTypeID | tinyint | NE |  | 🔗 SV → `order_type`; određuje ponašanje dokumenta |
+| Order | mediumint | NE |  | Redni broj dokumenta po godini/jedinici/vrsti |
+| Date | date | NE |  | Datum dokumenta |
+| ReceiptDate | date | DA |  | Datum prijema robe |
+| CustomerID | mediumint | DA |  | 🔗 SV → `customer` |
+| CurrencyID | tinyint | DA |  | 🔗 SV → `currency` |
+| Value | double(12,6) | DA |  | Kursna vrijednost |
+| DueDate / DueDateOld / DueDays | date/tinyint | DA |  | Uslovi plaćanja |
+| InvoiceNo | varchar(45) | DA |  | Referenca vanjske fakture |
+| InvoiceAmount | double(14,2) | DA | 0.00 | Ukupan iznos po fakturnoj cijeni |
+| DiscountAmount | double(14,2) | NE | 0.00 | Ukupan rabat |
+| TaxBaseAmount | double(14,2) | NE | 0.00 | Osnovica za PDV |
+| TaxAmoun | double(14,2) | NE | 0.00 | Iznos PDV-a (napomena: greška u nazivu kolone) |
+| AmountWithVAT | double(14,2) | NE | 0.00 | Ukupan iznos sa PDV-om |
+| AmountLessVAT | double(14,2) | NE | 0.00 | Ukupan iznos bez PDV-a |
+| IsPosted | tinyint | DA |  | Status računovodstvenog knjiženja |
+| IsCancelled | tinyint | DA |  | Zastavica storniranja |
+| InvoiceNumber | varchar(30) | DA |  | Službeni fiskalni broj fakture |
+| VerificationUrl | text | DA |  | URL za verifikaciju e-fakture |
+| WorkOrderHeaderID | int | DA |  | 🔗 SV → `work_order_header` |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (Year, UnitID, UnitPredispositionID, OrderTypeID, Order, IsActive). Kompozitni InvoiceReport indeks na (Year, UnitID, OrderTypeID, CustomerID, Date, IsActive). Individualni indeksi na CustomerID, OrderTypeID, UnitID, DueDate, Date, Order, IsActive, InvoiceID.
+
+## Relacije
+
+Referencira unit, order_type, customer. Stavke su u tabeli orders. Referenciraju ga protocol.OrderID, invoice.InvoiceID.
+

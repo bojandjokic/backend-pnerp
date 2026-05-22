@@ -1,0 +1,32 @@
+---
+title: user_token
+description: "Čuva autentifikacione tokene po korisniku (npr. refresh tokeni, tokeni eksternih provajdera). Implementira model tokena ASP.NET Core Identity."
+---
+
+# `pnerp.user_token`
+
+:::note[Modul]
+**Bezbjednost** — Pohrana autentifikacionih tokena
+:::
+
+## Opis
+
+Čuva autentifikacione tokene po korisniku (npr. refresh tokeni, tokeni eksternih provajdera). Implementira model tokena ASP.NET Core Identity.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| userID | mediumint | NE |  | 🔗 SV → `user`; dio kompozitnog PK |
+| Name | varchar(64) | NE |  | Naziv tokena; dio PK |
+| LoginProvider | varchar(128) | NE |  | Provajder; dio PK |
+| Value | varchar(128) | NE |  | Vrijednost tokena |
+
+## Indeksi
+
+Kompozitni PK na (userID, Name, LoginProvider). Indeks na Value.
+
+## Relacije
+
+SV → user.
+

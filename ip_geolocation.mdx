@@ -1,0 +1,36 @@
+---
+title: ip_geolocation
+description: "Kešira rezultate geolokacijskih pretraga IP adresa kako bi se izbjegli ponovljeni pozivi eksternom API-ju. Čuva zemlju, region, grad, ISP i koordinate za svaku pretraženu IP adresu."
+---
+
+# `pnerp.ip_geolocation`
+
+:::note[Modul]
+**Bezbjednost / Analitika** — Keš geolokacije IP adresa
+:::
+
+## Opis
+
+Kešira rezultate geolokacijskih pretraga IP adresa kako bi se izbjegli ponovljeni pozivi eksternom API-ju. Čuva zemlju, region, grad, ISP i koordinate za svaku pretraženu IP adresu.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| IpAddress | int | NE |  | IPv4 pohranjen kao cijeli broj |
+| Query | varchar(15) | NE |  | IP string (tačkasta notacija) |
+| Status | varchar(7) | DA |  | Status rezultata pretrage |
+| Country / CountryCode / Region / RegionName / City / Zip | varchar | DA |  | Geolokacijski podaci |
+| Lat / Lon | float(10,6) | DA |  | Koordinate |
+| Timezone / Isp / Org / As | varchar | DA |  | Mrežne informacije |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Indeksi na IpAddress, Query, Country, CountryCode, City, Zip, IsActive.
+
+## Relacije
+
+Referencira ga user_login.IpAddress.
+

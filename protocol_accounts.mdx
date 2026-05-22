@@ -1,0 +1,38 @@
+---
+title: protocol_accounts
+description: "Definiše pojedinačne dugovna/potražne stavke unutar podešavanja konta protokola. Svaki red određuje konto, stranu (D/P), modifikator predznaka i formulu za izračun iznosa iz mjesta iznosa protokola."
+---
+
+# `pnerp.protocol_accounts`
+
+:::note[Modul]
+**Računovodstvo** — Konfiguracija stavki konta za automatsko knjiženje
+:::
+
+## Opis
+
+Definiše pojedinačne dugovna/potražne stavke unutar podešavanja konta protokola. Svaki red određuje konto, stranu (D/P), modifikator predznaka i formulu za izračun iznosa iz mjesta iznosa protokola.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | mediumint | NE | AUTO | 🔑 Primarni ključ |
+| ProtocolAccountID | mediumint | NE |  | 🔗 SV → `protocol_account` |
+| OrdinalNumber | smallint | NE |  | Redoslijed stavke |
+| ProtocolAccountsTypeID | smallint | NE |  | 🔗 SV → `protocol_accounts_type` |
+| AccountID | smallint | NE |  | 🔗 SV → `konto` kontnog plana |
+| EntityID | tinyint | DA |  | Nadjačavanje entiteta |
+| NegativeSign | tinyint | DA |  | Zastavica za invertovanje predznaka |
+| Side | char(1) | DA |  | D = Duguje, P = Potražuje |
+| Formula | varchar(255) | DA |  | Formula za izračun iznosa (referencira mjesta Amount0–19) |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Indeksi na ProtocolAccountID, AccountID, ProtocolAccountsTypeID.
+
+## Relacije
+
+Referencira protocol_account, oldaccount (AccountID). Referencira ga protocols.
+

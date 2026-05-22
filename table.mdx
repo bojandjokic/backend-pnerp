@@ -1,0 +1,31 @@
+---
+title: table
+description: "Registar naziva tabela baze podataka s prijevodima na srpski. Koristi ga sistem knjiženja za identifikaciju izvornih tabela putem ID-a."
+---
+
+# `pnerp.table`
+
+:::note[Modul]
+**Sistem / Računovodstvo** — Registar naziva tabela za mehanizam knjiženja
+:::
+
+## Opis
+
+Registar naziva tabela baze podataka s prijevodima na srpski. Koristi ga sistem knjiženja za identifikaciju izvornih tabela putem ID-a.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | tinyint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(45) | NE |  | Naziv tabele (engleski) |
+| SerbianName | varchar(45) | NE |  | Naziv tabele na srpskom |
+
+## Indeksi
+
+Indeksi na Name, SerbianName.
+
+## Relacije
+
+Referenciraju ga posting_protocol.TableID i posting_settings.TableID.
+

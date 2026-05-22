@@ -1,0 +1,36 @@
+---
+title: work_order
+description: "Stavke izlaza (gotovih proizvoda) radnog naloga za proizvodnju. Svaki red definiše gotov proizvod, količinu i referencu na sastavnicu materijala."
+---
+
+# `pnerp.work_order`
+
+:::note[Modul]
+**Proizvodnja** — Stavke izlaza gotovih proizvoda radnog naloga
+:::
+
+## Opis
+
+Stavke izlaza (gotovih proizvoda) radnog naloga za proizvodnju. Svaki red definiše gotov proizvod, količinu i referencu na sastavnicu materijala.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| OrderID | int | NE |  | 🔗 SV → `work_order_header` |
+| OrdinalNumber | smallint | NE |  | Redni broj stavke |
+| BillOfMaterialID | int | DA |  | 🔗 SV → `sastavnica` materijala |
+| ProductID | mediumint | NE |  | 🔗 SV → `gotov` proizvod |
+| Description | varchar(255) | DA |  |  |
+| Qty / UnitPrice / Amount | decimal | NE/DA |  | Količina i vrednovanje |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (OrderID, OrdinalNumber, IsActive). Indeksi na ProductID, BillOfMaterialID.
+
+## Relacije
+
+Referencira work_order_header, product.
+

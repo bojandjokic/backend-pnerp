@@ -1,0 +1,36 @@
+---
+title: municipality
+description: "Geografski matični podaci za opštine s državom, regionom, entitetom (specifično za BiH), poštanskim brojem i troznakovnom šifrom."
+---
+
+# `pnerp.municipality`
+
+:::note[Modul]
+**Geografija / Sistem** — Geografski matični podaci opština/gradova
+:::
+
+## Opis
+
+Geografski matični podaci za opštine s državom, regionom, entitetom (specifično za BiH), poštanskim brojem i troznakovnom šifrom.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | mediumint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(70) | NE |  | Naziv opštine |
+| CountryID | tinyint | NE |  | 🔗 SV → `country` |
+| RegionID | mediumint | DA |  | 🔗 SV → `region` |
+| EntityID | tinyint | NE |  | Entitet u BiH (RS/FBIH/BD) |
+| Code | char(3) | NE |  | Troznakovni kod |
+| ZipCode | char(5) | NE |  | Poštanski broj |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Indeksi na Name, ZipCode, CountryID.
+
+## Relacije
+
+Referencira country, region. Referenciraju ga adresna polja u customer/unit.
+

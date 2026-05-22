@@ -1,0 +1,29 @@
+---
+title: sql$
+description: "Naslijeđena staging/import tabela koja se koristila za migraciju podataka o kupcima/partnerima iz starog sistema. Sadrži originalne nazive kolona na bosanskom/srpskom jeziku. Treba se tretirati kao pr"
+---
+
+# `pnerp.sql$`
+
+:::note[Modul]
+**Migracija podataka (naslijeđeno)** — Staging tabela za migraciju naslijeđenih podataka
+:::
+
+## Opis
+
+Naslijeđena staging/import tabela koja se koristila za migraciju podataka o kupcima/partnerima iz starog sistema. Sadrži originalne nazive kolona na bosanskom/srpskom jeziku. Treba se tretirati kao privremeni artefakt migracije, a ne kao produkciona tabela.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| SIFRA_PARTNERA do OZNAKA | varchar/double | DA |  | Sve kolone naslijeđenog uvoza s originalnom konvencijom imenovanja |
+
+## Indeksi
+
+Nema indeksa — import staging tabela.
+
+## Relacije
+
+Nema SV.
+

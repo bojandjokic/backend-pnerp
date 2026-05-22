@@ -1,0 +1,33 @@
+---
+title: time_sheet
+description: "Zaglavlje za radne liste zaposlenika po kompaniji, godini i mjesecu."
+---
+
+# `pnerp.time_sheet`
+
+:::note[Modul]
+**Plaće / HR** — Zaglavlje radnog lista zaposlenika
+:::
+
+## Opis
+
+Zaglavlje za radne liste zaposlenika po kompaniji, godini i mjesecu.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| CompanyID | smallint | NE |  | Kompanija |
+| Year / MonthID | year/tinyint | NE |  | Period |
+| EmployeesID | tinyint | NE |  | 🔗 SV → `zaposleni` |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Dnevni unosi u time_sheets.
+

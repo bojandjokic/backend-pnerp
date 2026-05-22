@@ -1,0 +1,33 @@
+---
+title: protocol_accounts_type
+description: "Definiše vrste stavki konta u podešavanju temeljnice (npr. poreska osnovica, iznos poreza, ukupan iznos). Sadrži polja formule i sirovog izraza formule za dinamično razrješavanje iznosa."
+---
+
+# `pnerp.protocol_accounts_type`
+
+:::note[Modul]
+**Računovodstvo** — Šifarnik vrsta stavki konta s podrškom za formule
+:::
+
+## Opis
+
+Definiše vrste stavki konta u podešavanju temeljnice (npr. poreska osnovica, iznos poreza, ukupan iznos). Sadrži polja formule i sirovog izraza formule za dinamično razrješavanje iznosa.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(30) | NE |  | Naziv vrste |
+| Entity | tinyint | DA |  | Opseg entiteta |
+| Formula / FormulaRaw | varchar(200) | DA |  | Prikazni i sirovi izrazi formula |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Referenciraju ga protocol_accounts, protocols.
+

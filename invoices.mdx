@@ -1,0 +1,29 @@
+---
+title: invoices
+description: "Stavke za zaglavlje fakture. Strukturno identične s tabelom orders, uz dodavanje polja fiskalnog storniranja."
+---
+
+# `pnerp.invoices`
+
+:::note[Modul]
+**Prodaja / Finansije** — Stavke fakture
+:::
+
+## Opis
+
+Stavke za zaglavlje fakture. Strukturno identične s tabelom orders, uz dodavanje polja fiskalnog storniranja.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| Struktura | — identična s orders — | - | - | Iste kolone kao orders plus IsCancelled/CancelledID |
+
+## Indeksi
+
+Isti pattern indeksa kao orders. Ima AFTER INSERT/UPDATE trigere koji ažuriraju zaglavlje fakture i zalihe.
+
+## Relacije
+
+Referencira zaglavlje fakture (OrderID), product, unit_of_measurement.
+

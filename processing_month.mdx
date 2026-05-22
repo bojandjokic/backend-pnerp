@@ -1,0 +1,36 @@
+---
+title: processing_month
+description: "Parametri obračuna plaća po mjesecu i obradi. Čuva radne sate, tarifu rada, minimalnu platu, radne dane i neoporezivi iznos za obračun plaća."
+---
+
+# `pnerp.processing_month`
+
+:::note[Modul]
+**Plaće / HR** — Mjесечni parametri obračuna plaća
+:::
+
+## Opis
+
+Parametri obračuna plaća po mjesecu i obradi. Čuva radne sate, tarifu rada, minimalnu platu, radne dane i neoporezivi iznos za obračun plaća.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| Year / MonthID / ProcessingNumber | tinyint | NE |  | Identifikacija perioda |
+| Hours | tinyint | DA |  | Standardni sati u mjesecu |
+| WorkPrice | double(6,2) | DA |  | Satnica za rad |
+| MinimumWage | double(6,2) | DA |  | Minimalna plata za period |
+| WorkDays | tinyint | DA |  | Radni dani u mjesecu |
+| TaxFreeAmount | double(6,2) | DA |  | Neoporezivi iznos dohotka |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Referencira month.
+

@@ -1,0 +1,37 @@
+---
+title: overview_invoices
+description: "Stavke za zaglavlje zbirne fakture."
+---
+
+# `pnerp.overview_invoices`
+
+:::note[Modul]
+**Prodaja / Finansije** — Stavke zbirne fakture
+:::
+
+## Opis
+
+Stavke za zaglavlje zbirne fakture.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| OrderID | int | NE |  | 🔗 SV → `zaglavlje` overview_invoice |
+| OrdinalNumber | smallint | NE |  | Redni broj stavke |
+| ProductID | mediumint | DA |  | 🔗 SV → `product` |
+| Qty | double(12,5) | NE |  | Količina |
+| UnitPrice | double(10,3) | NE |  | Jedinična cijena |
+| DiscountRate | float(6,2) | DA |  | Stopa rabata (%) |
+| Amount | double(14,2) | NE |  | Iznos stavke |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (OrderID, OrdinalNumber, IsActive). Ima AFTER INSERT/UPDATE trigere koji ažuriraju zaglavlje overview_invoice.
+
+## Relacije
+
+Referencira zaglavlje overview_invoice, product.
+

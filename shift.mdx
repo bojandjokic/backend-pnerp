@@ -1,0 +1,33 @@
+---
+title: shift
+description: "Definiše radne smjene s vremenima početka i završetka, koji se koriste u upravljanju radnim listama."
+---
+
+# `pnerp.shift`
+
+:::note[Modul]
+**HR / Plaće** — Definisanje radnih smjena
+:::
+
+## Opis
+
+Definiše radne smjene s vremenima početka i završetka, koji se koriste u upravljanju radnim listama.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| Code | tinyint | NE |  | Šifra smjene |
+| Name | varchar(30) | NE |  | Naziv smjene |
+| StartShift / EndShift | time | DA |  | Početak i kraj smjene |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Referenciraju ga unosi radnih lista.
+

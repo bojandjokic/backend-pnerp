@@ -1,0 +1,33 @@
+---
+title: standard_material
+description: "Definiše standardnu/podrazumijevanu sastavnicu materijala za gotov proizvod."
+---
+
+# `pnerp.standard_material`
+
+:::note[Modul]
+**Proizvodnja** — Zaglavlje standardne sastavnice materijala (BOM)
+:::
+
+## Opis
+
+Definiše standardnu/podrazumijevanu sastavnicu materijala za gotov proizvod.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| ProductID | mediumint | NE |  | 🔗 SV → `gotov` proizvod |
+| Qty | double(10,3) | NE |  | Standardna izlazna količina |
+| UnitID | smallint | DA |  | Organizaciona jedinica za proizvodnju |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Indeksi na ProductID, CreatedBy.
+
+## Relacije
+
+Referencira product. Stavke komponenti su u standard_materials.
+

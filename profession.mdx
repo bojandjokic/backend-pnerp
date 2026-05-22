@@ -1,0 +1,31 @@
+---
+title: profession
+description: "Šifarnik stručnih kvalifikacija ili struka."
+---
+
+# `pnerp.profession`
+
+:::note[Modul]
+**HR** — Šifarnik zanimanja/struka
+:::
+
+## Opis
+
+Šifarnik stručnih kvalifikacija ili struka.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(45) | NE |  | Naziv zanimanja |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Referenciraju ga zapisi zaposlenika.
+

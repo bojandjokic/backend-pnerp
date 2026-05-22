@@ -1,0 +1,32 @@
+---
+title: role
+description: "Sigurnosne uloge aplikacije. Implementira model uloga ASP.NET Core Identity s opisnim poljem za ERP."
+---
+
+# `pnerp.role`
+
+:::note[Modul]
+**Bezbjednost** — Matični podaci sigurnosnih uloga
+:::
+
+## Opis
+
+Sigurnosne uloge aplikacije. Implementira model uloga ASP.NET Core Identity s opisnim poljem za ERP.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(60) | NE |  | Jedinstven naziv uloge |
+| ConcurrencyStamp / Description | varchar(200) | DA |  | Identity i opisna polja |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na Name. Indeks na IsActive.
+
+## Relacije
+
+Ima dodjele dozvola putem role_transaction i user_role.
+

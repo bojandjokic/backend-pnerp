@@ -1,0 +1,36 @@
+---
+title: protocol_type
+description: "Definiše vrste računovodstvenih protokola/temeljnica (npr. knjiga ulaznih faktura, knjiga izlaznih faktura, platna lista). Vezuje se za šifarnike podvrsta nabavnih/prodajnih faktura i čuva opise formu"
+---
+
+# `pnerp.protocol_type`
+
+:::note[Modul]
+**Računovodstvo / Sistem** — Konfiguracija vrsta temeljnica/protokola
+:::
+
+## Opis
+
+Definiše vrste računovodstvenih protokola/temeljnica (npr. knjiga ulaznih faktura, knjiga izlaznih faktura, platna lista). Vezuje se za šifarnike podvrsta nabavnih/prodajnih faktura i čuva opise formula.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| EntityID | tinyint | DA |  | Opseg pravnog entiteta |
+| Code | varchar(10) | DA |  | Jedinstven po entitetu kada je aktivan |
+| Name | varchar(200) | NE |  | Puni naziv vrste |
+| PurchaseInvoiceTypeID | tinyint | DA |  | 🔗 SV → `purchase_invoice_type` |
+| SalesInvoiceTypeID | tinyint | DA |  | 🔗 SV → `sales_invoice_type` |
+| Description | longtext | DA |  | Detaljan opis |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (Code, EntityID, IsActive). Indeksi na EntityID, Name, PurchaseInvoiceTypeID, SalesInvoiceTypeID.
+
+## Relacije
+
+Referenciraju ga protocol, protocol_account, protocol_settings, product_account_group, order_type_account.
+

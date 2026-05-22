@@ -1,0 +1,36 @@
+---
+title: work_orders
+description: "Stavke utroška materijala za radni nalog (ulazne sirovine). Specificira proizvod, broj lota, količinu i cijenu utrošenih materijala."
+---
+
+# `pnerp.work_orders`
+
+:::note[Modul]
+**Proizvodnja** — Stavke utroška materijala radnog naloga
+:::
+
+## Opis
+
+Stavke utroška materijala za radni nalog (ulazne sirovine). Specificira proizvod, broj lota, količinu i cijenu utrošenih materijala.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| OrderID | int | NE |  | 🔗 SV → `work_order_header` |
+| OrdinalNumber | smallint | NE |  | Redni broj stavke |
+| UnitID | smallint | NE |  | Izvorni magacin/organizaciona jedinica |
+| ProductID | mediumint | NE |  | 🔗 SV → `sirovina`/poluproizvod |
+| Lot | varchar(30) | DA |  | Broj lota/serije |
+| Qty / UnitPrice / Amount | decimal | NE |  | Količina i trošak materijala |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (OrderID, OrdinalNumber, IsActive). Indeksi na ProductID, UnitID.
+
+## Relacije
+
+Referencira work_order_header, product, unit.
+

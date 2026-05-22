@@ -1,0 +1,31 @@
+---
+title: issue_type
+description: "Šifarnik kategorija problema koji se koriste u bilješkama o verzijama (npr. Ispravka greške, Nova funkcionalnost, Poboljšanje, Bezbjednost)."
+---
+
+# `pnerp.issue_type`
+
+:::note[Modul]
+**Sistem** — Šifarnik vrsta problema za bilješke o verzijama
+:::
+
+## Opis
+
+Šifarnik kategorija problema koji se koriste u bilješkama o verzijama (npr. Ispravka greške, Nova funkcionalnost, Poboljšanje, Bezbjednost).
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | smallint | NE | AUTO | 🔑 Primarni ključ |
+| Name | varchar(45) | NE |  | Naziv vrste problema |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Indeksi na Name, IsActive.
+
+## Relacije
+
+Referencira ga release_notes.
+

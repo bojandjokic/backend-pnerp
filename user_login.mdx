@@ -1,0 +1,32 @@
+---
+title: user_login
+description: "Revizijski log događaja prijave korisnika, koji čuva provajdera prijave, IP adresu i metapodatke provajdera. Podržava spoljne provajdere autentifikacije."
+---
+
+# `pnerp.user_login`
+
+:::note[Modul]
+**Bezbjednost / Revizija** — Revizijski log prijava i zapisi eksternih provajdera autentifikacije
+:::
+
+## Opis
+
+Revizijski log događaja prijave korisnika, koji čuva provajdera prijave, IP adresu i metapodatke provajdera. Podržava spoljne provajdere autentifikacije.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| LoginProvider / ProviderKey / ProviderDisplayName | varchar | DA |  | Podaci eksternog provajdera autentifikacije |
+| IpAddress | int | NE |  | Pohranjena kao cijeli broj (IPv4); 🔗 SV → `ip_geolocation` |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Indeksi na LoginProvider, ProviderKey, ProviderDisplayName, IpAddress.
+
+## Relacije
+
+Referencira user (putem CreatedBy). Vezan za ip_geolocation putem IpAddress.
+

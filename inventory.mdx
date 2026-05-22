@@ -1,0 +1,34 @@
+---
+title: inventory
+description: "Zaglavlje za periodične dokumente popisa zaliha. Bilježi organizacionu jedinicu, datum i redni broj dokumenta za vršenje fizičkog prebrojavanja zaliha."
+---
+
+# `pnerp.inventory`
+
+:::note[Modul]
+**Inventar / Magacin** — Zaglavlje dokumenta fizičkog popisa zaliha
+:::
+
+## Opis
+
+Zaglavlje za periodične dokumente popisa zaliha. Bilježi organizacionu jedinicu, datum i redni broj dokumenta za vršenje fizičkog prebrojavanja zaliha.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| Year | tinyint | DA |  | Fiskalna godina |
+| UnitID | smallint | NE |  | 🔗 SV → `unit` (lokacija) |
+| Order | mediumint | NE |  | Redni broj dokumenta |
+| Date | date | NE |  | Datum popisa |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Nisu eksplicitno definisani.
+
+## Relacije
+
+Stavke su u tabeli inventories.
+

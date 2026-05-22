@@ -1,0 +1,34 @@
+---
+title: posting_protocol
+description: "Čuva pravila knjiženja zasnovana na formulama (20 mjesta formula) za automatizovane računovodstvene stavke, po tabeli, entitetu i vrsti protokola. Koristi ga mehanizam knjiženja za izračun iznosa iz i"
+---
+
+# `pnerp.posting_protocol`
+
+:::note[Modul]
+**Računovodstvo / Sistem** — Pravila automatskog knjiženja zasnovana na formulama
+:::
+
+## Opis
+
+Čuva pravila knjiženja zasnovana na formulama (20 mjesta formula) za automatizovane računovodstvene stavke, po tabeli, entitetu i vrsti protokola. Koristi ga mehanizam knjiženja za izračun iznosa iz izvornih dokumenata.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | mediumint | NE | AUTO | 🔑 Primarni ključ |
+| TableID | smallint | NE |  | Identifikator izvorne tabele podataka |
+| EntityID | tinyint | NE |  | Pravni entitet |
+| ProtocolTypeID | smallint | NE |  | 🔗 SV → `protocol_type` |
+| Formula0–Formula19 | varchar(255) | DA |  | 20 izraza formula za izvođenje Amount0–19 |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (TableID, EntityID, ProtocolTypeID, IsActive).
+
+## Relacije
+
+Referencira protocol_type.
+

@@ -1,0 +1,37 @@
+---
+title: overview_invoice
+description: "Zaglavlje za periodične zbirne fakture. Pokriva određeni vremenski period i sumira naplate iz redovnih faktura za kupca."
+---
+
+# `pnerp.overview_invoice`
+
+:::note[Modul]
+**Prodaja / Finansije** — Zaglavlja periodičnih zbirnih faktura
+:::
+
+## Opis
+
+Zaglavlje za periodične zbirne fakture. Pokriva određeni vremenski period i sumira naplate iz redovnih faktura za kupca.
+
+## Kolone
+
+| Naziv kolone | Tip podatka | Nullable | Default | Napomena |
+| :--- | :--- | :---: | :---: | :--- |
+| ID | int | NE | AUTO | 🔑 Primarni ključ |
+| Year | tinyint | DA |  | Fiskalna godina |
+| CompanyID | smallint | NE |  | Kompanija |
+| UnitID | smallint | NE |  | Organizaciona jedinica koja izdaje |
+| Order | mediumint | NE |  | Broj dokumenta |
+| DateFrom / DateTo | date | NE/DA |  | Obuhvaćeni period |
+| Amount | double(14,2) | DA |  | Ukupan iznos |
+| CustomerID / CustomerIDold | mediumint | NE/DA |  | Tekući i legacy kupac |
+| CreatedBy / UpdatedBy / CreatedAt / UpdatedAt / IsActive | revizija | - | - | Standardna polja za praćenje promjena |
+
+## Indeksi
+
+Jedinstven na (Year, UnitID, Order, IsActive). Indeksi na DateFrom, DateTo, CustomerID.
+
+## Relacije
+
+Referencira unit, customer. Stavke su u overview_invoices.
+
