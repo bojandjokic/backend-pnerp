@@ -1,0 +1,30 @@
+---
+title: code
+description: >
+  Sifarnik kodova (barcodes, SKU itd.) vezanih za proizvode.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Sifarnik kodova (barcodes, SKU itd.) vezanih za proizvode. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| ProductID | mediumint | NOT NULL |  | FK → product |
+| Type | char(1) | NOT NULL |  | Tip koda (B=barcode, ...) |
+| Code | varchar(15) | NOT NULL |  | Vrijednost koda |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| ProductID | ProductID | INDEX |  |

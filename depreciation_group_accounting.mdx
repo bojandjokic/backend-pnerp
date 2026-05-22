@@ -1,0 +1,56 @@
+---
+title: depreciation_group_accounting
+description: >
+  Grupe amortizacije za računovodstvene svrhe sa stopama i vezama na konta u glavnoj knjizi.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Grupe amortizacije za računovodstvene svrhe sa stopama i vezama na konta u glavnoj knjizi. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | smallint | NOT NULL | IDENTITY | PK — auto-increment |
+| Code | varchar(6) | NOT NULL | — | Šifra grupe (unique) |
+| Name | varchar(60) | NOT NULL | — | Naziv grupe |
+| IsActiveCurrent | tinyint | NULL | 1 | Status aktuelnosti |
+| UnitID | smallint | NOT NULL | — | FK → unit |
+| BasicAssetMethodID | tinyint | NOT NULL | — | Metoda amortizacije OS |
+| Period | tinyint | NULL | NULL | Period amortizacije |
+| BaseRate | float(5,2) | NOT NULL | — | Osnovna stopa amortizacije |
+| AcceleratedRate | float(5,2) | NULL | NULL | Ubrzana stopa amortizacije |
+| AccountPurchaseID | smallint | NULL | NULL | FK → konto nabavke |
+| AccountCustomerID | smallint | NULL | NULL | FK → konto kupca |
+| AccountDepreciationOweID | smallint | NULL | NULL | FK → konto amortizacije (duguje) |
+| AccountDepreciationClaimID | smallint | NULL | NULL | FK → konto amortizacije (potražuje) |
+| AccountIncreaseOweID | smallint | NULL | NULL | FK → konto povećanja (duguje) |
+| AccountIncreaseClaimID | smallint | NULL | NULL | FK → konto povećanja (potražuje) |
+| AccountDecreaseOweID | smallint | NULL | NULL | FK → konto smanjenja (duguje) |
+| AccountDecreaseClaimID | smallint | NULL | NULL | FK → konto smanjenja (potražuje) |
+| CreatedBy | mediumint | NOT NULL | — | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| Code (UNIQUE) | Code | UNIQUE | Jedinstvenost šifre grupe |
+| Name | Name | INDEX |  |
+| UnitID | UnitID | INDEX |  |
+| BasicAssetMethodID | BasicAssetMethodID | INDEX |  |
+| IsActiveCurrent | IsActiveCurrent | INDEX |  |
+| IsActive | IsActive | INDEX |  |
+| AccountPurchaseID | AccountPurchaseID | INDEX |  |
+| AccountCustomerID | AccountCustomerID | INDEX |  |
+| AccountDepreciationOweID | AccountDepreciationOweID | INDEX |  |
+| AccountDepreciationClaimID | AccountDepreciationClaimID | INDEX |  |
+| AccountIncreaseOweID | AccountIncreaseOweID | INDEX |  |
+| AccountIncreaseClaimID | AccountIncreaseClaimID | INDEX |  |
+| AccountDecreaseOweID | AccountDecreaseOweID | INDEX |  |
+| AccountDecreaseClaimID | AccountDecreaseClaimID | INDEX |  |

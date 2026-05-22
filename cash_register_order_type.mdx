@@ -1,0 +1,28 @@
+---
+title: cash_register_order_type
+description: >
+  Sifarnik vrsta blagajnickih naloga (npr. primitak, izdatak).
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Sifarnik vrsta blagajnickih naloga (npr. primitak, izdatak). |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | tinyint | NOT NULL | IDENTITY | PK — auto-increment |
+| Code | tinyint | NOT NULL |  | Interni kod vrste naloga |
+| Name | varchar(45) | NULL | NULL | Naziv vrste naloga |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |

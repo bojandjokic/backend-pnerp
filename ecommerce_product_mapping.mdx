@@ -1,0 +1,37 @@
+---
+title: ecommerce_product_mapping
+description: >
+  Mapiranje eksternih produkata e-commerce platforme na interne artikle u ERP-u.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Mapiranje eksternih produkata e-commerce platforme na interne artikle u ERP-u. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| IntegrationConfigID | int | NOT NULL | — | FK → ecommerce_integration_configs |
+| CompanyID | int | NOT NULL | — | FK → company |
+| ExternalProductID | varchar(255) | NULL | NULL | ID produkta na platformi |
+| ExternalVariantID | varchar(255) | NULL | NULL | ID varijante na platformi |
+| ExternalSKU | varchar(255) | NULL | NULL | SKU na platformi |
+| ExternalProductName | varchar(500) | NULL | NULL | Naziv produkta na platformi |
+| InternalProductID | int | NOT NULL | — | FK → product (interni) |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+| PriceOverride | decimal(10,2) | NULL | NULL | Override cijena (opcionalno) |
+| CreatedAt | datetime | NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | datetime | NULL | current_timestamp() | Row last update timestamp |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| unique_variant (UNIQUE) | IntegrationConfigID, ExternalVariantID | UNIQUE | Jedinstvenost varijante po integraciji |
+| idx_product_lookup | IntegrationConfigID, ExternalProductID | INDEX |  |
+| idx_sku_lookup | IntegrationConfigID, ExternalSKU | INDEX | Pretraga po SKU unutar integracije |
+| idx_company | CompanyID | INDEX |  |
+| idx_internal_product | InternalProductID | INDEX |  |

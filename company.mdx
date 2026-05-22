@@ -1,0 +1,71 @@
+---
+title: company
+description: >
+  Maticni podaci o kompaniji (vlasniku sustava). Sadrzi kontaktne i porezne podatke, bankovne racune i parametre ispisa.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Maticni podaci o kompaniji (vlasniku sustava). Sadrzi kontaktne i porezne podatke, bankovne racune i parametre ispisa. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | smallint | NOT NULL | IDENTITY | PK — auto-increment |
+| Code | smallint | NOT NULL |  | Interni sifarski kod |
+| Name | varchar(80) | NOT NULL |  | Naziv kompanije |
+| FormsOrganizationID | tinyint | NULL | NULL | FK → forms_organization |
+| Address | varchar(70) | NOT NULL |  | Adresa |
+| CityID | mediumint | NOT NULL |  | FK → city |
+| Phone1 | varchar(20) | NULL | NULL | Telefon 1 |
+| Phone2 | varchar(20) | NULL | NULL | Telefon 2 |
+| Email | varchar(50) | NULL | NULL | E-mail 1 |
+| Email2 | varchar(50) | NULL | NULL | E-mail 2 |
+| BankAccount1 | varchar(70) | NULL | NULL | IBAN 1 |
+| BankAccount2 | varchar(70) | NULL | NULL | IBAN 2 |
+| BankAccount3 | varchar(70) | NULL | NULL | IBAN 3 |
+| BankAccount4 | varchar(70) | NULL | NULL | IBAN 4 |
+| BankAccount5 | varchar(70) | NULL | NULL | IBAN 5 |
+| VAT | tinyint | NULL | NULL | PDV obveznik (1=da) |
+| DateVAT | date | NULL | NULL | Datum upisa u PDV |
+| TaxNo | char(13) | NULL | NULL | JIB / maticni broj |
+| VatNo | char(12) | NULL | NULL | PDV broj |
+| MBS | varchar(20) | NULL | NULL | MBS |
+| MB | varchar(20) | NULL | NULL | MB |
+| InfoNumber | varchar(20) | NULL | NULL | Informacijski broj |
+| AgencyID | smallint | NULL | NULL | FK → agency |
+| ProportionalDeduction | float(4,2) | NULL | NULL | Srazmjerni odbitak (%) |
+| TaxAttorneyName | varchar(80) | NULL | NULL | Naziv poreznog zastupnika |
+| TaxAttorneyAddress | varchar(70) | NULL | NULL | Adresa poreznog zastupnika |
+| TaxAttorneyCityID | mediumint | NULL | NULL | FK → city (zastupnik) |
+| TaxAttorneyTaxNo | varchar(13) | NULL | NULL | JIB poreznog zastupnika |
+| Web | varchar(50) | NULL | NULL | Web stranica |
+| Facebook | varchar(50) | NULL | NULL | Facebook profil |
+| Instagram | varchar(50) | NULL | NULL | Instagram profil |
+| YouTube | varchar(50) | NULL | NULL | YouTube kanal |
+| TikTok | varchar(50) | NULL | NULL | TikTok profil |
+| Note | varchar(255) | NULL | NULL | Kratka napomena |
+| Description | longtext | NULL | NULL | Detaljni opis |
+| Year | tinyint | NULL | NULL | Aktivna poslovna godina |
+| Owner | varchar(45) | NULL | NULL | Vlasnik / odgovorna osoba |
+| IsVPN | tinyint | NULL | NULL | Flag: VPN konekcija |
+| PrintFiscal | tinyint | NULL | NULL | Flag: fiskalni ispis |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| Code (UNIQUE) | Code, IsActive | UNIQUE | Jedinstvenost sifre kompanije |
+| Name (UNIQUE) | Name, IsActive | UNIQUE | Jedinstvenost naziva |
+| Name_2 | Name | INDEX |  |
+| AgencyID | AgencyID | INDEX |  |
+| FormsOrganizationID | FormsOrganizationID | INDEX |  |
+| CityID | CityID | INDEX |  |
+| IsActive | IsActive | INDEX |  |

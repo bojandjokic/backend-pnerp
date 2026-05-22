@@ -1,0 +1,37 @@
+---
+title: discounted_price_customer
+description: >
+  Zaglavlje diskontnih cijena po kupcu — period važenja i vezana narudžba.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Zaglavlje diskontnih cijena po kupcu — period važenja i vezana narudžba. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| UnitID | smallint | NOT NULL | — | FK → unit |
+| Order | mediumint | NOT NULL | — | Broj narudžbe |
+| CustomerID | mediumint | NOT NULL | — | FK → customer |
+| DateFrom | date | NOT NULL | — | Datum početka važenja |
+| DateTo | date | NOT NULL | — | Datum kraja važenja |
+| Note | text | NULL | NULL | Napomena |
+| CreatedBy | mediumint | NOT NULL | — | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| UnitID (UNIQUE) | UnitID, Order, IsActive | UNIQUE | Jedinstvenost narudžbe po jedinici |
+| DateFrom | DateFrom | INDEX |  |
+| DateTo | DateTo | INDEX |  |
+| Order | Order | INDEX |  |
+| CustomerID | CustomerID | INDEX |  |

@@ -1,0 +1,29 @@
+---
+title: account_attitude
+description: >
+  Šifarnik stavova konta po entitetu. Dvocifreni kod sa nazivom.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Šifarnik stavova konta po entitetu. Dvocifreni kod sa nazivom. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | tinyint | NOT NULL | IDENTITY | PK — auto-increment |
+| EntityID | tinyint | NOT NULL | — | FK → entity |
+| Code | char(2) | NOT NULL | — | Dvocifreni kod stava |
+| Name | varchar(200) | NULL | NULL | Naziv stava |
+| CreatedBy | mediumint | NOT NULL | — | FK → korisnik (kreator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → korisnik (posljednja izmjena) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Timestamp kreiranja |
+| UpdatedAt | timestamp | NULL | NULL | Timestamp izmjene |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = aktivan) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |

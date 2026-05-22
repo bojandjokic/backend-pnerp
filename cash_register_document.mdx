@@ -1,0 +1,29 @@
+---
+title: cash_register_document
+description: >
+  Sifarnik vrsta dokumenata koji se mogu koristiti u blagajnickim stavkama.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Sifarnik vrsta dokumenata koji se mogu koristiti u blagajnickim stavkama. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | tinyint | NOT NULL | IDENTITY | PK — auto-increment |
+| Code | tinyint | NOT NULL |  | Interni kod |
+| Name | varchar(45) | NOT NULL |  | Naziv vrste dokumenta |
+| ProductAccountGroupID | smallint | NULL | NULL | FK → product_account_group |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |

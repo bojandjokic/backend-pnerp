@@ -1,0 +1,43 @@
+---
+title: ercpy_accounting
+description: >
+  Zaglavlja računovodstvenih naloga uvezenih iz ePisarnice (ERCPY) sa podacima o kompaniji i periodu.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Zaglavlja računovodstvenih naloga uvezenih iz ePisarnice (ERCPY) sa podacima o kompaniji i periodu. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | mediumint | NOT NULL | IDENTITY | PK — auto-increment |
+| Year | tinyint | NOT NULL | — | Godina naloga |
+| companyTaxNo | char(13) | NOT NULL | — | JIB kompanije |
+| companyID | smallint | NOT NULL | — | FK → company |
+| period | char(6) | NOT NULL | — | Obračunski period |
+| entry_date | date | NOT NULL | — | Datum unosa naloga |
+| entry_number | varchar(10) | NOT NULL | — | Broj naloga |
+| description | varchar(45) | NULL | NULL | Opis naloga |
+| total_debit | double(14,2) | NULL | NULL | Ukupno duguje |
+| total_credit | double(14,2) | NULL | NULL | Ukupno potražuje |
+| IsPosted | tinyint | NULL | NULL | Nalog proknjižen |
+| CreatedBy | mediumint | NOT NULL | — | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| uk_ercpy_accounting (UNIQUE) | Year, companyID, entry_number, IsActive | UNIQUE | Jedinstvenost naloga po godini i kompaniji |
+| companyTaxNo | companyTaxNo | INDEX |  |
+| companyID | companyID | INDEX |  |
+| period | period | INDEX |  |
+| entry_date | entry_date | INDEX |  |
+| IsPosted | IsPosted | INDEX |  |
+| IsActive | IsActive | INDEX |  |

@@ -1,0 +1,81 @@
+---
+title: pnerp Database Reference
+description: MariaDB database schema for pnerp ERP system (~57 tables)
+tableOfContents: false
+---
+
+import { CardGrid, LinkCard } from "@astrojs/starlight/components";
+
+# pnerp — Database Table Reference
+
+> April 2026 &nbsp;·&nbsp; ~57 tables &nbsp;·&nbsp; MariaDB / InnoDB
+
+## Legend
+
+| Symbol | Meaning |
+| --- | --- |
+| ★ (yellow) | Primary Key column |
+| ✦ (green) | Indexed column (FK or performance index) |
+| UNIQUE | Unique index — duplicate values rejected |
+
+## Tables
+
+<CardGrid>
+<LinkCard title="account" description="Kontni plan. Čuva kodove konta glavne knjige sa mapiranjima otvaranja salda i AO..." href="/database/account" />
+<LinkCard title="account_attitude" description="Šifarnik stavova konta po entitetu. Dvocifreni kod sa nazivom." href="/database/account_attitude" />
+<LinkCard title="account_class" description="Klase konta po entitetu. Jednocifreni kod klase sa nazivom. Grupišu konta prvog ..." href="/database/account_class" />
+<LinkCard title="account_old_new" description="Mapiranje starih konta na nova između entiteta. Koristi se pri migraciji ili res..." href="/database/account_old_new" />
+<LinkCard title="account_old_new_ISarajevo" description="Mapiranje starih na nova konta specifično za entitet Ilidža Sarajevo. Identična ..." href="/database/account_old_new_ISarajevo" />
+<LinkCard title="account_old_new_copy" description="Radna/privremena kopija tabele account_old_new. Koristi se za testiranje ili pri..." href="/database/account_old_new_copy" />
+<LinkCard title="account_synthetics" description="Sintetička konta po entitetu. Trocifreni kod grupišu analitička konta unutar kon..." href="/database/account_synthetics" />
+<LinkCard title="account_type" description="Tipovi konta. Šifarnik vrsta konta sa numeričkim kodom, skraćenicom i vezom na t..." href="/database/account_type" />
+<LinkCard title="additional_sheet" description="Šifarnik dodatnih listova (obrazaca). Jednocifreni kod i oznaka sa nazivom obras..." href="/database/additional_sheet" />
+<LinkCard title="agency" description="Šifarnik agencija. Petocifreni kod i naziv agencije. Nema standardnih audit kolo..." href="/database/agency" />
+<LinkCard title="analytics2" description="Analitika drugog nivoa. Slobodni šifarnik naziva za drugu dimenziju analitičkog ..." href="/database/analytics2" />
+<LinkCard title="analytics3" description="Analitika trećeg nivoa. Slobodni šifarnik naziva za treću dimenziju analitičkog ..." href="/database/analytics3" />
+<LinkCard title="aop" description="AOP pozicije (Godišnji operativni plan). Četverocifreni kod sa nazivom i opciona..." href="/database/aop" />
+<LinkCard title="basic_asset_method" description="Metode obračuna osnovnih sredstava (npr. linearna, degresivna). Šifarnik sa jedi..." href="/database/basic_asset_method" />
+<LinkCard title="bill_of_material" description="Sastavnica materijala (jednostavna verzija). Vezuje nalog i proizvod sa količino..." href="/database/bill_of_material" />
+<LinkCard title="bill_of_materials" description="Stavke sastavnice materijala (detaljna verzija). Svaka stavka nosi redni broj, j..." href="/database/bill_of_materials" />
+<LinkCard title="cash_box" description="Blagajne / POS terminali. Definira konfiguraciju svakog POS uredaja (IP, port, t..." href="/database/cash_box" />
+<LinkCard title="cash_register" description="Zaglavlja naloga blagajnickog dnevnika. Svaki redak predstavlja jedan blagajnick..." href="/database/cash_register" />
+<LinkCard title="cash_register_document" description="Sifarnik vrsta dokumenata koji se mogu koristiti u blagajnickim stavkama." href="/database/cash_register_document" />
+<LinkCard title="cash_register_order_type" description="Sifarnik vrsta blagajnickih naloga (npr. primitak, izdatak)." href="/database/cash_register_order_type" />
+<LinkCard title="cash_registers" description="Stavke blagajnickih naloga. Svaka stavka vezana je za nalog iz cash_register i s..." href="/database/cash_registers" />
+<LinkCard title="city" description="Sifarnik mjesta / gradova. Svako mjesto vezano je za opcinu, entitet i drzavu." href="/database/city" />
+<LinkCard title="code" description="Sifarnik kodova (barcodes, SKU itd.) vezanih za proizvode." href="/database/code" />
+<LinkCard title="company" description="Maticni podaci o kompaniji (vlasniku sustava). Sadrzi kontaktne i porezne podatk..." href="/database/company" />
+<LinkCard title="cost" description="Sifarnik troskova po kompaniji. Definira kategorije ili vrste troskova." href="/database/cost" />
+<LinkCard title="country" description="Sifarnik drzava. Sadrzi ISO kodove i numericke kodove za svaku drzavu." href="/database/country" />
+<LinkCard title="credit_note" description="Zaglavlja knjiznih odobrenja (credit note). Evidentira odobrenja per kompanija, ..." href="/database/credit_note" />
+<LinkCard title="credit_notes" description="Stavke knjiznih odobrenja. Svaka stavka sadrzi iznose originalnog racuna i odobr..." href="/database/credit_notes" />
+<LinkCard title="currency" description="Sifarnik valuta. Svaka valuta ima ISO kod, simbol i vezu s drzavom." href="/database/currency" />
+<LinkCard title="currency1" description="Pomocna / sigurnosna kopija sifarnika valuta. Ista struktura kao currency." href="/database/currency1" />
+<LinkCard title="customer" description="Sifarnik kupaca. Sadrzi kontaktne, porezne i bancovne podatke kupca te njegovu v..." href="/database/customer" />
+<LinkCard title="customer_group" description="Sifarnik grupa kupaca za kategorizaciju i segmentaciju." href="/database/customer_group" />
+<LinkCard title="department" description="Šifarnik odjeljenja preduzeća. Vezuje se za poslovnu jedinicu (subunit) i opcion..." href="/database/department" />
+<LinkCard title="depreciation_group_accounting" description="Grupe amortizacije za računovodstvene svrhe sa stopama i vezama na konta u glavn..." href="/database/depreciation_group_accounting" />
+<LinkCard title="depreciation_group_tax" description="Grupe amortizacije za porezne svrhe sa stopama i vezama na konta." href="/database/depreciation_group_tax" />
+<LinkCard title="discounted_price_customer" description="Zaglavlje diskontnih cijena po kupcu — period važenja i vezana narudžba." href="/database/discounted_price_customer" />
+<LinkCard title="discounted_price_customers" description="Stavke diskontnih cijena — artikli s diskontnom stopom ili fiksnom cijenom unuta..." href="/database/discounted_price_customers" />
+<LinkCard title="ecommerce_customer_mapping" description="Mapiranje eksternih kupaca e-commerce platforme na interne kupce u ERP-u." href="/database/ecommerce_customer_mapping" />
+<LinkCard title="ecommerce_integration_configs" description="Konfiguracija e-commerce integracija (Shopify i sl.) po kompaniji i provideru sa..." href="/database/ecommerce_integration_configs" />
+<LinkCard title="ecommerce_invoice_emails" description="Log slanja e-mail obavještenja o fakturama generisanim iz e-commerce naloga." href="/database/ecommerce_invoice_emails" />
+<LinkCard title="ecommerce_order_sync_log" description="Log sinhronizacije e-commerce naloga u ERP fakture sa praćenjem pokušaja i greša..." href="/database/ecommerce_order_sync_log" />
+<LinkCard title="ecommerce_product_mapping" description="Mapiranje eksternih produkata e-commerce platforme na interne artikle u ERP-u." href="/database/ecommerce_product_mapping" />
+<LinkCard title="economic_calendar" description="Kalendar privrednih i ekonomskih događaja i važnih datuma po entitetu i godini." href="/database/economic_calendar" />
+<LinkCard title="employees" description="Registar zaposlenika sa ličnim, profesionalnim i ugovornim podacima." href="/database/employees" />
+<LinkCard title="entity" description="Šifarnik entiteta (FBiH, RS, Brčko i sl.) sa skraćenicom." href="/database/entity" />
+<LinkCard title="ercpy_accounting" description="Zaglavlja računovodstvenih naloga uvezenih iz ePisarnice (ERCPY) sa podacima o k..." href="/database/ercpy_accounting" />
+<LinkCard title="ercpy_accounting_lines" description="Stavke računovodstvenih naloga iz ERCPY integracije sa kontima i iznosima." href="/database/ercpy_accounting_lines" />
+<LinkCard title="error" description="Sistemski log grešaka aplikacije — server, klijent, stack trace i kontekst koris..." href="/database/error" />
+<LinkCard title="exchange_rate" description="Šifarnik deviznih kurseva po valuti i datumu." href="/database/exchange_rate" />
+<LinkCard title="excise_tax" description="Šifarnik akciza sa iznosom po jedinici (litri alkohola)." href="/database/excise_tax" />
+<LinkCard title="financial_order" description="Zaglavlja finansijskih naloga glavne knjige sa ukupnim iznosima i vezama na prot..." href="/database/financial_order" />
+<LinkCard title="financial_order_settings" description="Konfiguracija vidljivosti i obaveznosti polja finansijskog naloga po entitetu, t..." href="/database/financial_order_settings" />
+<LinkCard title="financial_orders" description="Stavke finansijskih naloga glavne knjige sa kontima, iznosima i PDV podacima." href="/database/financial_orders" />
+<LinkCard title="financial_orderstt" description="Stavke privremenih/tranzitnih finansijskih naloga glavne knjige (temp-tables)." href="/database/financial_orderstt" />
+<LinkCard title="financial_ordertt" description="Zaglavlja privremenih finansijskih naloga glavne knjige (temp-tables)." href="/database/financial_ordertt" />
+<LinkCard title="form_position" description="Korisnički zapis pozicije forme na ekranu (X/Y koordinate) za pamćenje rasporeda..." href="/database/form_position" />
+<LinkCard title="forms_organization" description="Šifarnik oblika organizacije preduzeća (d.o.o., d.d., s.p. i sl.)." href="/database/forms_organization" />
+</CardGrid>

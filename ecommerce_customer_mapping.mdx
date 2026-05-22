@@ -1,0 +1,34 @@
+---
+title: ecommerce_customer_mapping
+description: >
+  Mapiranje eksternih kupaca e-commerce platforme na interne kupce u ERP-u.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Mapiranje eksternih kupaca e-commerce platforme na interne kupce u ERP-u. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| IntegrationConfigID | int | NOT NULL | — | FK → ecommerce_integration_configs |
+| CompanyID | int | NOT NULL | — | FK → company |
+| ExternalCustomerID | varchar(255) | NOT NULL | — | ID kupca na eksternoj platformi |
+| ExternalCustomerEmail | varchar(255) | NULL | NULL | Email kupca na platformi |
+| ExternalCustomerName | varchar(255) | NULL | NULL | Naziv kupca na platformi |
+| InternalCustomerID | int | NOT NULL | — | FK → customer (interni) |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+| CreatedAt | datetime | NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | datetime | NULL | current_timestamp() | Row last update timestamp |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| unique_external_customer (UNIQUE) | IntegrationConfigID, ExternalCustomerID | UNIQUE | Jedinstvenost eksternog kupca po integraciji |
+| idx_company | CompanyID | INDEX |  |
+| idx_email_lookup | IntegrationConfigID, ExternalCustomerEmail | INDEX | Pretraga po emailu unutar integracije |
+| idx_internal_customer | InternalCustomerID | INDEX |  |

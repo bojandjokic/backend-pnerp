@@ -1,0 +1,35 @@
+---
+title: cash_register
+description: >
+  Zaglavlja naloga blagajnickog dnevnika. Svaki redak predstavlja jedan blagajnicki nalog (primitak ili izdatak).
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Zaglavlja naloga blagajnickog dnevnika. Svaki redak predstavlja jedan blagajnicki nalog (primitak ili izdatak). |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| Year | tinyint | NULL | NULL | Godina knjizenja |
+| UnitID | smallint | NOT NULL |  | FK → unit |
+| CashRegisterOrderTypeID | tinyint | NULL | NULL | FK → cash_register_order_type |
+| Order | mediumint | NOT NULL |  | Redni broj naloga |
+| Date | date | NULL | NULL | Datum naloga |
+| Description | varchar(255) | NULL | NULL | Opis / napomena |
+| CurrencyID | tinyint | NULL | NULL | FK → currency |
+| CurrencyValue | double(12,6) | NULL | NULL | Tecaj valute |
+| InvoiceNo | varchar(45) | NULL | NULL | Broj racuna |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |

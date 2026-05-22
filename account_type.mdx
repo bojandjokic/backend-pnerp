@@ -1,0 +1,35 @@
+---
+title: account_type
+description: >
+  Tipovi konta. Šifarnik vrsta konta sa numeričkim kodom, skraćenicom i vezom na tip fakture. Označava i da li se radi o preduzetniku.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Tipovi konta. Šifarnik vrsta konta sa numeričkim kodom, skraćenicom i vezom na tip fakture. Označava i da li se radi o preduzetniku. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | smallint | NOT NULL | IDENTITY | PK — auto-increment |
+| Code | smallint | NOT NULL | — | Numerički kod tipa (jedinstven po IsActive) |
+| Name | varchar(80) | NOT NULL | — | Naziv tipa konta |
+| Abbreviation | varchar(10) | NULL | NULL | Skraćenica tipa konta |
+| InvoiceTypeID | tinyint | NULL | NULL | FK → tip fakture vezan za ovaj tip konta |
+| Entrepreneur | tinyint | NULL | NULL | Zastavica: radi se o preduzetniku |
+| CreatedBy | mediumint | NOT NULL | — | FK → korisnik (kreator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → korisnik (posljednja izmjena) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Timestamp kreiranja |
+| UpdatedAt | timestamp | NULL | NULL | Timestamp izmjene |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = aktivan) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| **Code (UNIQUE)** | Code, IsActive | UNIQUE | Jedinstvenost koda po aktivnom statusu |
+| **Name** | Name | INDEX |  |
+| **Abbreviation** | Abbreviation | INDEX |  |
+| **IsActive** | IsActive | INDEX |  |

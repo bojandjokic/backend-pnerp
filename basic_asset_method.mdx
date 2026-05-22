@@ -1,0 +1,29 @@
+---
+title: basic_asset_method
+description: >
+  Metode obračuna osnovnih sredstava (npr. linearna, degresivna). Šifarnik sa jedinstvenim nazivom metode.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Metode obračuna osnovnih sredstava (npr. linearna, degresivna). Šifarnik sa jedinstvenim nazivom metode. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | tinyint | NOT NULL | IDENTITY | PK — auto-increment |
+| Name | varchar(20) | NOT NULL | — | Naziv metode (UNIQUE) |
+| CreatedBy | mediumint | NOT NULL | — | FK → korisnik (kreator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → korisnik (posljednja izmjena) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Timestamp kreiranja |
+| UpdatedAt | timestamp | NULL | NULL | Timestamp izmjene |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = aktivan) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| **Name (UNIQUE)** | Name | UNIQUE | Jedinstvenost naziva metode |
+| **IsActive** | IsActive | INDEX |  |

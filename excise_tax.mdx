@@ -1,0 +1,31 @@
+---
+title: excise_tax
+description: >
+  Šifarnik akciza sa iznosom po jedinici (litri alkohola).
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Šifarnik akciza sa iznosom po jedinici (litri alkohola). |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | smallint | NOT NULL | IDENTITY | PK — auto-increment |
+| Name | varchar(45) | NOT NULL | — | Naziv akcize |
+| AcloholPerLiter | tinyint | NOT NULL | 0 | Alkohol po litri |
+| Amount | double(9,2) | NOT NULL | — | Iznos akcize |
+| CreatedBy | mediumint | NOT NULL | — | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| Name | Name | INDEX |  |
+| IsActive | IsActive | INDEX |  |

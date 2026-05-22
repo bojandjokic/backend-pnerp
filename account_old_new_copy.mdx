@@ -1,0 +1,39 @@
+---
+title: account_old_new_copy
+description: >
+  Radna/privremena kopija tabele account_old_new. Koristi se za testiranje ili privremenu obradu mapiranja konta bez uticaja na produkcione podatke.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Radna/privremena kopija tabele account_old_new. Koristi se za testiranje ili privremenu obradu mapiranja konta bez uticaja na produkcione podatke. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| EntityIDOld | tinyint | NOT NULL | — | FK → entitet (staro konto) |
+| AccountOld | varchar(8) | NOT NULL | — | Kod starog konta |
+| AccountIDOld | smallint | NOT NULL | — | FK → account (staro) |
+| EntityIDNew | tinyint | NOT NULL | — | FK → entitet (novo konto) |
+| AccountNew | varchar(8) | NOT NULL | — | Kod novog konta |
+| AccountIDNew | smallint | NOT NULL | — | FK → account (novo) |
+| CreatedBy | mediumint | NOT NULL | — | FK → korisnik (kreator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → korisnik (posljednja izmjena) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Timestamp kreiranja |
+| UpdatedAt | timestamp | NULL | NULL | Timestamp izmjene |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = aktivan) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| **AccountOld** | EntityIDOld, AccountOld, IsActive | INDEX | Složeni indeks za pretragu po starom kontu |
+| **AccountIDOld** | AccountIDOld | INDEX |  |
+| **EntityIDOld** | EntityIDOld | INDEX |  |
+| **AccountNew** | AccountNew | INDEX |  |
+| **AccountIDNew** | AccountIDNew | INDEX |  |
+| **EntityIDNew** | EntityIDNew | INDEX |  |
+| **IsActive** | IsActive | INDEX |  |

@@ -1,0 +1,34 @@
+---
+title: economic_calendar
+description: >
+  Kalendar privrednih i ekonomskih događaja i važnih datuma po entitetu i godini.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Kalendar privrednih i ekonomskih događaja i važnih datuma po entitetu i godini. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | mediumint | NOT NULL | IDENTITY | PK — auto-increment |
+| Year | tinyint | NULL | NULL | Godina događaja |
+| EntityID | tinyint | NOT NULL | — | FK → entity |
+| Date | date | NOT NULL | — | Datum događaja |
+| Importance | tinyint | NOT NULL | — | Važnost (nivo prioriteta) |
+| Code | varchar(10) | NULL | NULL | Šifra događaja |
+| Name | varchar(120) | NOT NULL | — | Naziv događaja |
+| Note | text | NULL | NULL | Napomena |
+| CreatedBy | mediumint | NOT NULL | — | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| Year | Year, EntityID, Date | INDEX | Pretraga po godini, entitetu i datumu |

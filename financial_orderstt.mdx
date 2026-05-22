@@ -1,0 +1,76 @@
+---
+title: financial_orderstt
+description: >
+  Stavke privremenih/tranzitnih finansijskih naloga glavne knjige (temp-tables).
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Stavke privremenih/tranzitnih finansijskih naloga glavne knjige (temp-tables). |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| OrderID | int | NOT NULL | — | FK → financial_ordertt |
+| OrdinalNumber | smallint | NOT NULL | — | Redni broj stavke |
+| Date | date | NOT NULL | — | Datum stavke |
+| MonthID | tinyint | NOT NULL | — | FK → month |
+| DueDate | date | NULL | NULL | Datum dospijeća |
+| DateVAT | date | NULL | NULL | Datum PDV-a |
+| Description | varchar(100) | NULL | NULL | Opis stavke |
+| KUFNo | mediumint | NULL | NULL | KUF broj |
+| CustomerID | mediumint | NULL | NULL | FK → customer |
+| InvoiceNo | varchar(45) | NULL | NULL | Broj fakture |
+| ImportNo | varchar(45) | NULL | NULL | Broj uvoza |
+| AccountID | smallint | NOT NULL | — | FK → account |
+| UnitID | smallint | NULL | NULL | FK → unit |
+| SubunitID | smallint | NULL | NULL | FK → subunit |
+| DepartmentID | smallint | NULL | NULL | FK → department |
+| TaxTypeID | tinyint | NULL | NULL | FK → tax_type |
+| InvoiceTypeID | tinyint | NULL | NULL | FK → invoice_type |
+| InvoiceTypeCode | char(2) | NULL | NULL | Kod tipa fakture |
+| InvoiceTypeIsPurchase | tinyint | NULL | NULL | Je li ulazna faktura |
+| PurchaseInvoiceTypeID | tinyint | NULL | NULL | FK → purchase_invoice_type |
+| SalesInvoiceTypeID | tinyint | NULL | NULL | FK → sales_invoice_type |
+| Owe | double(14,2) | NULL | NULL | Iznos duguje |
+| Claim | double(14,2) | NULL | NULL | Iznos potražuje |
+| PurchaseInvoiceTaxNoDuction11 | double(14,2) | NULL | NULL | PDV bez odbitka (col 11) |
+| VATAddition | tinyint | NULL | NULL | PDV dodatak |
+| Entity | varchar(3) | NULL | NULL | Entitet (skraćenica) |
+| AmountInvoicesWithoutVAT6 | double(14,2) | NULL | NULL | Iznos bez PDV (col 6) |
+| AmountInvoicesWithVAT7 | double(14,2) | NULL | NULL | Iznos sa PDV (col 7) |
+| PurchaseInvoiceTaxDuction10 | double(14,2) | NULL | NULL | PDV sa odbitkom (col 10) |
+| ProtocolID | int | NOT NULL | — | FK → protocol |
+| CreatedBy | mediumint | NULL | NULL | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| FinancialOrderID (UNIQUE) | OrderID, OrdinalNumber, IsActive | UNIQUE | Jedinstvenost stavke po nalogu |
+| AccountID | AccountID, IsActive | INDEX |  |
+| OrderID | OrderID | INDEX |  |
+| OrdinalNumber | OrdinalNumber | INDEX |  |
+| Date | Date | INDEX |  |
+| DueDate | DueDate | INDEX |  |
+| DateVAT | DateVAT | INDEX |  |
+| MonthID | MonthID | INDEX |  |
+| CustomerID | CustomerID | INDEX |  |
+| UnitID | UnitID | INDEX |  |
+| SubunitID | SubunitID | INDEX |  |
+| DepartmentID | DepartmentID | INDEX |  |
+| InvoiceTypeID | InvoiceTypeID | INDEX |  |
+| PurchaseInvoiceTypeID | PurchaseInvoiceTypeID | INDEX |  |
+| TaxTypeID | TaxTypeID | INDEX |  |
+| KUFNo | KUFNo | INDEX |  |
+| Description | Description | INDEX |  |
+| InvoiceNoDate | InvoiceNo, Date | INDEX |  |
+| CreatedAt | CreatedAt | INDEX |  |
+| IsActive | IsActive | INDEX |  |

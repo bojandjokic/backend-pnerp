@@ -1,0 +1,37 @@
+---
+title: credit_note
+description: >
+  Zaglavlja knjiznih odobrenja (credit note). Evidentira odobrenja per kompanija, jedinica i kupac.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Zaglavlja knjiznih odobrenja (credit note). Evidentira odobrenja per kompanija, jedinica i kupac. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| CompanyID | smallint | NOT NULL |  | FK → company |
+| UnitID | smallint | NOT NULL |  | FK → unit |
+| Order | mediumint | NOT NULL |  | Redni broj knjiznog odobrenja |
+| Date | date | NOT NULL |  | Datum odobrenja |
+| CustomerID | smallint | NOT NULL |  | FK → customer |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| CompanyID (UNIQUE) | CompanyID, UnitID, Order, IsActive | UNIQUE | Sprjecava duplikat odobrenja |
+| CustomerID | CustomerID | INDEX |  |
+| Order | Order | INDEX |  |
+| UnitID | UnitID | INDEX |  |
+| Date | Date | INDEX |  |
+| IsActive | IsActive | INDEX |  |

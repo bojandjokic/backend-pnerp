@@ -1,0 +1,54 @@
+---
+title: financial_order
+description: >
+  Zaglavlja finansijskih naloga glavne knjige sa ukupnim iznosima i vezama na protokol.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Zaglavlja finansijskih naloga glavne knjige sa ukupnim iznosima i vezama na protokol. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| Year | tinyint | NULL | NULL | Godina naloga |
+| CompanyID | smallint | NOT NULL | — | FK → company |
+| AccountTypeID | smallint | NOT NULL | — | FK → account_type |
+| Order | mediumint | NOT NULL | — | Broj naloga |
+| OrderDate | date | NOT NULL | — | Datum naloga |
+| CurrencyID | tinyint | NULL | NULL | FK → currency |
+| CurrencyValue | double(12,6) | NULL | NULL | Kursna vrijednost |
+| OrderDescription | varchar(45) | NULL | NULL | Opis naloga |
+| Note | text | NULL | NULL | Napomena |
+| Owe | double(16,2) | NULL | NULL | Ukupno duguje |
+| Claim | double(16,2) | NULL | NULL | Ukupno potražuje |
+| ProtocolID | int | NULL | NULL | FK → protocol |
+| IsLocked | tinyint | NULL | NULL | Nalog zaključan |
+| IsCancelled | tinyint | NULL | NULL | Nalog storniran |
+| CanceledlID | int | NULL | NULL | FK → originalni nalog (storno) |
+| CreatedBy | mediumint | NOT NULL | — | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| Year (UNIQUE) | Year, CompanyID, Order, IsActive | UNIQUE | Jedinstvenost naloga po godini i kompaniji |
+| CompanyID | CompanyID | INDEX |  |
+| AccountTypeID | AccountTypeID | INDEX |  |
+| OrderOrderDate | Order, OrderDate | INDEX |  |
+| OrderDate | OrderDate | INDEX |  |
+| CurrencyID | CurrencyID | INDEX |  |
+| ProtocolID | ProtocolID | INDEX |  |
+| IsLocked | IsLocked | INDEX |  |
+| IsActive | IsActive | INDEX |  |
+| Note | Note | INDEX |  |
+| OrderDescription | OrderDescription | INDEX |  |
+| CreatedAt | CreatedAt | INDEX |  |
+| UpdatedAt | UpdatedAt | INDEX |  |

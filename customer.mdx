@@ -1,0 +1,70 @@
+---
+title: customer
+description: >
+  Sifarnik kupaca. Sadrzi kontaktne, porezne i bancovne podatke kupca te njegovu vezu s kompanijom, jedinicom i grupom.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Sifarnik kupaca. Sadrzi kontaktne, porezne i bancovne podatke kupca te njegovu vezu s kompanijom, jedinicom i grupom. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | mediumint | NOT NULL | IDENTITY | PK — auto-increment |
+| CompanyID | smallint | NOT NULL |  | FK → company |
+| Code | mediumint | NOT NULL |  | Sifarski kod kupca |
+| Name | varchar(80) | NOT NULL |  | Naziv kupca |
+| FormsOrganizationID | tinyint | NULL | NULL | FK → forms_organization |
+| Address | varchar(70) | NOT NULL |  | Adresa |
+| CityID | mediumint | NULL | NULL | FK → city |
+| Phone1 | varchar(20) | NULL | NULL | Telefon 1 |
+| Phone2 | varchar(20) | NULL | NULL | Telefon 2 |
+| Email | varchar(50) | NULL | NULL | E-mail |
+| UnitID | smallint | NULL | NULL | FK → unit |
+| CustomerGroupID | smallint | NULL | NULL | FK → customer_group |
+| TravelingSalesmanID | smallint | NULL | NULL | FK → traveling_salesman |
+| BankAccount1 | varchar(70) | NULL | NULL | IBAN 1 |
+| BankAccount2 | varchar(70) | NULL | NULL | IBAN 2 |
+| BankAccount3 | varchar(70) | NULL | NULL | IBAN 3 |
+| BankAccount4 | varchar(70) | NULL | NULL | IBAN 4 |
+| BankAccount5 | varchar(70) | NULL | NULL | IBAN 5 |
+| VAT | tinyint | NULL | NULL | PDV obveznik |
+| TaxNo | char(13) | NULL | NULL | JIB |
+| VatNo | char(12) | NULL | NULL | PDV broj |
+| TaxNoIno | varchar(20) | NULL | NULL | Strani porezni broj |
+| MBS | varchar(20) | NULL | NULL | MBS |
+| MB | varchar(20) | NULL | NULL | MB |
+| AgencyID | smallint | NULL | NULL | FK → agency |
+| TaxAttorneyName | varchar(80) | NULL | NULL | Naziv poreznog zastupnika |
+| TaxAttorneyAddress | varchar(70) | NULL | NULL | Adresa poreznog zastupnika |
+| TaxAttorneyCityID | mediumint | NULL | NULL | FK → city (zastupnik) |
+| TaxAttorneyTaxNo | varchar(13) | NULL | NULL | JIB zastupnika |
+| Note | varchar(255) | NULL | NULL | Kratka napomena |
+| Description | longtext | NULL | NULL | Detaljni opis |
+| DateVat | date | NULL | NULL | Datum upisa u PDV |
+| IsPerson | tinyint | NULL | NULL | Flag: fizicka osoba |
+| OldCity | varchar(255) | NULL | NULL | Stari naziv mjesta (migracija) |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| CompanyID (UNIQUE) | CompanyID, Code, IsActive | UNIQUE | Jedinstvenost sifre kupca po kompaniji |
+| CompanyID_2 | CompanyID, Name, IsActive | INDEX |  |
+| TravelingSalesmanID | TravelingSalesmanID | INDEX |  |
+| UnitID | UnitID | INDEX |  |
+| CityID | CityID, IsActive | INDEX |  |
+| FkCustomerCity | CityID | INDEX |  |
+| CustomerGroupID | CustomerGroupID | INDEX |  |
+| Name | Name | INDEX |  |
+| Code | Code | INDEX |  |
+| Note | Note | INDEX |  |
+| IsActive | IsActive | INDEX |  |

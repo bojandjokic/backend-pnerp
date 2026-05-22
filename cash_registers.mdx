@@ -1,0 +1,33 @@
+---
+title: cash_registers
+description: >
+  Stavke blagajnickih naloga. Svaka stavka vezana je za nalog iz cash_register i sadrzi iznos, kupca i vrstu dokumenta.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Stavke blagajnickih naloga. Svaka stavka vezana je za nalog iz cash_register i sadrzi iznos, kupca i vrstu dokumenta. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| OrderID | int | NOT NULL |  | FK → cash_register |
+| OrdinalNumber | smallint | NULL | NULL | Redni broj stavke |
+| CashRegisterDocumentID | tinyint | NULL | NULL | FK → cash_register_document |
+| CustomerID | mediumint | NULL | NULL | FK → customer |
+| InvoiceNo | varchar(45) | NULL | NULL | Broj racuna |
+| Description | varchar(255) | NULL | NULL | Opis stavke |
+| Value | double(14,2) | NULL | NULL | Iznos stavke |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |

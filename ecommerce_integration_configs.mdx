@@ -1,0 +1,56 @@
+---
+title: ecommerce_integration_configs
+description: >
+  Konfiguracija e-commerce integracija (Shopify i sl.) po kompaniji i provideru sa parametrima sinhronizacije i slanja faktura.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Konfiguracija e-commerce integracija (Shopify i sl.) po kompaniji i provideru sa parametrima sinhronizacije i slanja faktura. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| CompanyID | int | NOT NULL | — | FK → company |
+| UnitID | int | NULL | NULL | FK → unit |
+| Provider | varchar(50) | NOT NULL | — | Naziv providera (shopify, woo...) |
+| StoreName | varchar(255) | NOT NULL | — | Naziv prodavnice |
+| ApiKey | text | NULL | NULL | API ključ |
+| ApiSecret | text | NULL | NULL | API secret |
+| AccessToken | text | NULL | NULL | Access token |
+| ShopDomain | varchar(255) | NULL | NULL | Domena prodavnice |
+| DefaultOrderTypeID | int | NULL | NULL | FK → tip naloga |
+| DefaultYear | int | NULL | NULL | Podrazumijevana godina |
+| DefaultUnitPredispositionID | int | NULL | NULL | FK → predispozicija jedinice |
+| DefaultCurrencyID | int | NULL | NULL | FK → currency |
+| DefaultTaxRate | decimal(5,2) | NULL | 17.00 | Podrazumijevana stopa PDV-a |
+| B2CCustomerCompanyID | int | NULL | NULL | FK → company za B2C kupca |
+| DefaultCustomerGroupID | int | NULL | 1 | FK → customer_group |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+| SyncIntervalMinutes | int | NULL | 15 | Interval sinhronizacije (min) |
+| SyncOrdersFromDate | datetime | NULL | NULL | Datum od kojeg se sincroniziraju narudžbe |
+| AutoCreateCustomers | tinyint | NULL | 1 | Auto-kreacija kupaca |
+| RequireProductMapping | tinyint | NULL | 1 | Obavezno mapiranje artikala |
+| SendInvoiceEmail | tinyint | NULL | 1 | Slanje email-a s fakturom |
+| EmailFrom | varchar(255) | NULL | NULL | Adresa pošiljaoca |
+| EmailReplyTo | varchar(255) | NULL | NULL | Reply-To adresa |
+| EmailSubjectTemplate | varchar(500) | NULL | 'Invoice {invoiceNumber}' | Predložak subject-a emaila |
+| LastSyncAt | datetime | NULL | NULL | Datum/vrijeme posljednje sinhronizacije |
+| LastSyncStatus | enum | NULL | success | Status posljednje sinhronizacije |
+| LastSyncErrorMessage | text | NULL | NULL | Poruka greške posljednje sinhronizacije |
+| CreatedByUserID | int | NULL | NULL | FK → user (creator) |
+| CreatedAt | datetime | NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | datetime | NULL | current_timestamp() | Row last update timestamp |
+| SendInvoiceEmails | tinyint | NULL | 0 | Master switch za slanje email faktura |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| idx_company_provider | CompanyID, Provider | INDEX |  |
+| idx_unit | UnitID | INDEX |  |
+| idx_active | IsActive, LastSyncAt | INDEX | Filtriranje aktivnih integracija |
+| idx_email_enabled | SendInvoiceEmail | INDEX |  |

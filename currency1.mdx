@@ -1,0 +1,35 @@
+---
+title: currency1
+description: >
+  Pomocna / sigurnosna kopija sifarnika valuta. Ista struktura kao currency.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Pomocna / sigurnosna kopija sifarnika valuta. Ista struktura kao currency. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | tinyint | NOT NULL | IDENTITY | PK — auto-increment |
+| Name | varchar(20) | NOT NULL |  | Naziv valute |
+| NameInvoice | varchar(45) | NULL | NULL | Naziv za ispis na racunu |
+| CountryID | tinyint | NOT NULL |  | FK → country |
+| Code | char(3) | NOT NULL |  | ISO 4217 kod valute |
+| Symbol | varchar(4) | NOT NULL |  | Simbol valute |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| Name (UNIQUE) | Name, IsActive | UNIQUE |  |
+| Name_2 | Name | INDEX |  |
+| CountryID | CountryID | INDEX |  |
+| IsActive | IsActive | INDEX |  |

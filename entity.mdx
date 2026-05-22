@@ -1,0 +1,25 @@
+---
+title: entity
+description: >
+  Šifarnik entiteta (FBiH, RS, Brčko i sl.) sa skraćenicom.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Šifarnik entiteta (FBiH, RS, Brčko i sl.) sa skraćenicom. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | tinyint | NOT NULL | — | PK |
+| Name | varchar(30) | NOT NULL | — | Naziv entiteta |
+| Abbreviation | varchar(3) | NOT NULL | — | Skraćenica entiteta |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| Abbreviation (UNIQUE) | Abbreviation | UNIQUE | Jedinstvenost skraćenice |
+| Name (UNIQUE) | Name | UNIQUE | Jedinstvenost naziva |

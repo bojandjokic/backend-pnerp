@@ -1,0 +1,33 @@
+---
+title: account_synthetics
+description: >
+  Sintetička konta po entitetu. Trocifreni kod grupišu analitička konta unutar kontnog plana.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Sintetička konta po entitetu. Trocifreni kod grupišu analitička konta unutar kontnog plana. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | smallint | NOT NULL | IDENTITY | PK — auto-increment |
+| EntityID | tinyint | NOT NULL | — | FK → entity |
+| Code | char(3) | NOT NULL | — | Trocifreni kod sintetičkog konta |
+| Name | varchar(200) | NOT NULL | — | Naziv sintetičkog konta |
+| CreatedBy | mediumint | NOT NULL | — | FK → korisnik (kreator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → korisnik (posljednja izmjena) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Timestamp kreiranja |
+| UpdatedAt | timestamp | NULL | NULL | Timestamp izmjene |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = aktivan) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| **EntityID_2 (UNIQUE)** | EntityID, Code | UNIQUE | Sprečava duplikate koda po entitetu |
+| **EntityID** | EntityID | INDEX |  |
+| **Code** | Code | INDEX |  |
+| **Name** | Name | INDEX |  |

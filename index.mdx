@@ -1,0 +1,172 @@
+---
+title: pnerp Database Reference
+description: MariaDB database schema za pnerp ERP sistem — 57 tabela u 11 kategorija
+tableOfContents: true
+---
+
+# pnerp — Database Table Reference
+
+> April 2026 &nbsp;·&nbsp; **57 tabela** &nbsp;·&nbsp; MariaDB / InnoDB &nbsp;·&nbsp; 11 kategorija
+
+## Legend
+
+| Oznaka | Značenje |
+| --- | --- |
+| **PK** | Primary Key (auto-increment) |
+| FK → | Foreign key referenca |
+| UNIQUE | Unikatni indeks |
+| INDEX | Indeks za performanse |
+
+---
+
+## Pregled kategorija
+
+| Kategorija | Broj tabela | Tabele |
+| --- | --- | --- |
+| **Kontni plan i računovodstvo** | 10 | `account`, `account_attitude`, `account_class`, `account_old_new`, `account_old_new_ISarajevo`, `account_old_new_copy`, `account_synthetics`, `account_type`, `aop`, `additional_sheet` |
+| **Finansijski nalozi i knjiženja** | 7 | `financial_order`, `financial_order_settings`, `financial_orders`, `financial_orderstt`, `financial_ordertt`, `ercpy_accounting`, `ercpy_accounting_lines` |
+| **Blagajna i POS** | 5 | `cash_box`, `cash_register`, `cash_register_document`, `cash_register_order_type`, `cash_registers` |
+| **Kupci i prodaja** | 6 | `customer`, `customer_group`, `discounted_price_customer`, `discounted_price_customers`, `credit_note`, `credit_notes` |
+| **E-Commerce integracija** | 5 | `ecommerce_customer_mapping`, `ecommerce_integration_configs`, `ecommerce_invoice_emails`, `ecommerce_order_sync_log`, `ecommerce_product_mapping` |
+| **Osnovna sredstva i amortizacija** | 3 | `basic_asset_method`, `depreciation_group_accounting`, `depreciation_group_tax` |
+| **Materijalno i proizvodnja** | 3 | `bill_of_material`, `bill_of_materials`, `cost` |
+| **Valute i porezi** | 4 | `currency`, `currency1`, `exchange_rate`, `excise_tax` |
+| **Šifarnici i organizacija** | 12 | `agency`, `analytics2`, `analytics3`, `city`, `code`, `company`, `country`, `department`, `economic_calendar`, `entity`, `forms_organization`, `form_position` |
+| **Zaposlenici** | 1 | `employees` |
+| **Sistemski log i greške** | 1 | `error` |
+
+---
+
+## Kontni plan i računovodstvo
+
+**10 tabela**
+
+| Tabela | Opis |
+| --- | --- |
+| [`account`](./account/) | Kontni plan. Čuva kodove konta glavne knjige sa mapiranjima otvaranja salda i AOP (Godišnji operativni plan) po periodim... |
+| [`account_attitude`](./account_attitude/) | Šifarnik stavova konta po entitetu. Dvocifreni kod sa nazivom. |
+| [`account_class`](./account_class/) | Klase konta po entitetu. Jednocifreni kod klase sa nazivom. Grupišu konta prvog nivoa kontnog plana. |
+| [`account_old_new`](./account_old_new/) | Mapiranje starih konta na nova između entiteta. Koristi se pri migraciji ili restrukturiranju kontnog plana. |
+| [`account_old_new_ISarajevo`](./account_old_new_ISarajevo/) | Mapiranje starih na nova konta specifično za entitet Ilidža Sarajevo. Identična struktura kao account_old_new, izdvojena... |
+| [`account_old_new_copy`](./account_old_new_copy/) | Radna/privremena kopija tabele account_old_new. Koristi se za testiranje ili privremenu obradu mapiranja konta bez utica... |
+| [`account_synthetics`](./account_synthetics/) | Sintetička konta po entitetu. Trocifreni kod grupišu analitička konta unutar kontnog plana. |
+| [`account_type`](./account_type/) | Tipovi konta. Šifarnik vrsta konta sa numeričkim kodom, skraćenicom i vezom na tip fakture. Označava i da li se radi o p... |
+| [`aop`](./aop/) | AOP pozicije (Godišnji operativni plan). Četverocifreni kod sa nazivom i opcionalnom referencom na avansku poziciju. |
+| [`additional_sheet`](./additional_sheet/) | Šifarnik dodatnih listova (obrazaca). Jednocifreni kod i oznaka sa nazivom obrasca. |
+
+## Finansijski nalozi i knjiženja
+
+**7 tabela**
+
+| Tabela | Opis |
+| --- | --- |
+| [`financial_order`](./financial_order/) | Zaglavlja finansijskih naloga glavne knjige sa ukupnim iznosima i vezama na protokol. |
+| [`financial_order_settings`](./financial_order_settings/) | Konfiguracija vidljivosti i obaveznosti polja finansijskog naloga po entitetu, tipu konta, kompaniji i korisniku. |
+| [`financial_orders`](./financial_orders/) | Stavke finansijskih naloga glavne knjige sa kontima, iznosima i PDV podacima. |
+| [`financial_orderstt`](./financial_orderstt/) | Stavke privremenih/tranzitnih finansijskih naloga glavne knjige (temp-tables). |
+| [`financial_ordertt`](./financial_ordertt/) | Zaglavlja privremenih finansijskih naloga glavne knjige (temp-tables). |
+| [`ercpy_accounting`](./ercpy_accounting/) | Zaglavlja računovodstvenih naloga uvezenih iz ePisarnice (ERCPY) sa podacima o kompaniji i periodu. |
+| [`ercpy_accounting_lines`](./ercpy_accounting_lines/) | Stavke računovodstvenih naloga iz ERCPY integracije sa kontima i iznosima. |
+
+## Blagajna i POS
+
+**5 tabela**
+
+| Tabela | Opis |
+| --- | --- |
+| [`cash_box`](./cash_box/) | Blagajne / POS terminali. Definira konfiguraciju svakog POS uredaja (IP, port, token, pin) i njegovu vezu s poslovnom je... |
+| [`cash_register`](./cash_register/) | Zaglavlja naloga blagajnickog dnevnika. Svaki redak predstavlja jedan blagajnicki nalog (primitak ili izdatak). |
+| [`cash_register_document`](./cash_register_document/) | Sifarnik vrsta dokumenata koji se mogu koristiti u blagajnickim stavkama. |
+| [`cash_register_order_type`](./cash_register_order_type/) | Sifarnik vrsta blagajnickih naloga (npr. primitak, izdatak). |
+| [`cash_registers`](./cash_registers/) | Stavke blagajnickih naloga. Svaka stavka vezana je za nalog iz cash_register i sadrzi iznos, kupca i vrstu dokumenta. |
+
+## Kupci i prodaja
+
+**6 tabela**
+
+| Tabela | Opis |
+| --- | --- |
+| [`customer`](./customer/) | Sifarnik kupaca. Sadrzi kontaktne, porezne i bancovne podatke kupca te njegovu vezu s kompanijom, jedinicom i grupom. |
+| [`customer_group`](./customer_group/) | Sifarnik grupa kupaca za kategorizaciju i segmentaciju. |
+| [`discounted_price_customer`](./discounted_price_customer/) | Zaglavlje diskontnih cijena po kupcu — period važenja i vezana narudžba. |
+| [`discounted_price_customers`](./discounted_price_customers/) | Stavke diskontnih cijena — artikli s diskontnom stopom ili fiksnom cijenom unutar narudžbe. |
+| [`credit_note`](./credit_note/) | Zaglavlja knjiznih odobrenja (credit note). Evidentira odobrenja per kompanija, jedinica i kupac. |
+| [`credit_notes`](./credit_notes/) | Stavke knjiznih odobrenja. Svaka stavka sadrzi iznose originalnog racuna i odobrene razlike. |
+
+## E-Commerce integracija
+
+**5 tabela**
+
+| Tabela | Opis |
+| --- | --- |
+| [`ecommerce_customer_mapping`](./ecommerce_customer_mapping/) | Mapiranje eksternih kupaca e-commerce platforme na interne kupce u ERP-u. |
+| [`ecommerce_integration_configs`](./ecommerce_integration_configs/) | Konfiguracija e-commerce integracija (Shopify i sl.) po kompaniji i provideru sa parametrima sinhronizacije i slanja fak... |
+| [`ecommerce_invoice_emails`](./ecommerce_invoice_emails/) | Log slanja e-mail obavještenja o fakturama generisanim iz e-commerce naloga. |
+| [`ecommerce_order_sync_log`](./ecommerce_order_sync_log/) | Log sinhronizacije e-commerce naloga u ERP fakture sa praćenjem pokušaja i grešaka. |
+| [`ecommerce_product_mapping`](./ecommerce_product_mapping/) | Mapiranje eksternih produkata e-commerce platforme na interne artikle u ERP-u. |
+
+## Osnovna sredstva i amortizacija
+
+**3 tabela**
+
+| Tabela | Opis |
+| --- | --- |
+| [`basic_asset_method`](./basic_asset_method/) | Metode obračuna osnovnih sredstava (npr. linearna, degresivna). Šifarnik sa jedinstvenim nazivom metode. |
+| [`depreciation_group_accounting`](./depreciation_group_accounting/) | Grupe amortizacije za računovodstvene svrhe sa stopama i vezama na konta u glavnoj knjizi. |
+| [`depreciation_group_tax`](./depreciation_group_tax/) | Grupe amortizacije za porezne svrhe sa stopama i vezama na konta. |
+
+## Materijalno i proizvodnja
+
+**3 tabela**
+
+| Tabela | Opis |
+| --- | --- |
+| [`bill_of_material`](./bill_of_material/) | Sastavnica materijala (jednostavna verzija). Vezuje nalog i proizvod sa količinom po kompaniji. Prethodnik ili alternati... |
+| [`bill_of_materials`](./bill_of_materials/) | Stavke sastavnice materijala (detaljna verzija). Svaka stavka nosi redni broj, jedinicu mjere, cijenu i iznos. Koristi s... |
+| [`cost`](./cost/) | Sifarnik troskova po kompaniji. Definira kategorije ili vrste troskova. |
+
+## Valute i porezi
+
+**4 tabela**
+
+| Tabela | Opis |
+| --- | --- |
+| [`currency`](./currency/) | Sifarnik valuta. Svaka valuta ima ISO kod, simbol i vezu s drzavom. |
+| [`currency1`](./currency1/) | Pomocna / sigurnosna kopija sifarnika valuta. Ista struktura kao currency. |
+| [`exchange_rate`](./exchange_rate/) | Šifarnik deviznih kurseva po valuti i datumu. |
+| [`excise_tax`](./excise_tax/) | Šifarnik akciza sa iznosom po jedinici (litri alkohola). |
+
+## Šifarnici i organizacija
+
+**12 tabela**
+
+| Tabela | Opis |
+| --- | --- |
+| [`agency`](./agency/) | Šifarnik agencija. Petocifreni kod i naziv agencije. Nema standardnih audit kolona — lagana lookup tabela. |
+| [`analytics2`](./analytics2/) | Analitika drugog nivoa. Slobodni šifarnik naziva za drugu dimenziju analitičkog knjiženja. |
+| [`analytics3`](./analytics3/) | Analitika trećeg nivoa. Slobodni šifarnik naziva za treću dimenziju analitičkog knjiženja. Ima FK constraint prema tabel... |
+| [`city`](./city/) | Sifarnik mjesta / gradova. Svako mjesto vezano je za opcinu, entitet i drzavu. |
+| [`code`](./code/) | Sifarnik kodova (barcodes, SKU itd.) vezanih za proizvode. |
+| [`company`](./company/) | Maticni podaci o kompaniji (vlasniku sustava). Sadrzi kontaktne i porezne podatke, bankovne racune i parametre ispisa. |
+| [`country`](./country/) | Sifarnik drzava. Sadrzi ISO kodove i numericke kodove za svaku drzavu. |
+| [`department`](./department/) | Šifarnik odjeljenja preduzeća. Vezuje se za poslovnu jedinicu (subunit) i opcionalno za grad. |
+| [`economic_calendar`](./economic_calendar/) | Kalendar privrednih i ekonomskih događaja i važnih datuma po entitetu i godini. |
+| [`entity`](./entity/) | Šifarnik entiteta (FBiH, RS, Brčko i sl.) sa skraćenicom. |
+| [`forms_organization`](./forms_organization/) | Šifarnik oblika organizacije preduzeća (d.o.o., d.d., s.p. i sl.). |
+| [`form_position`](./form_position/) | Korisnički zapis pozicije forme na ekranu (X/Y koordinate) za pamćenje rasporeda UI. |
+
+## Zaposlenici
+
+**1 tabela**
+
+| Tabela | Opis |
+| --- | --- |
+| [`employees`](./employees/) | Registar zaposlenika sa ličnim, profesionalnim i ugovornim podacima. |
+
+## Sistemski log i greške
+
+**1 tabela**
+
+| Tabela | Opis |
+| --- | --- |
+| [`error`](./error/) | Sistemski log grešaka aplikacije — server, klijent, stack trace i kontekst korisnika. |

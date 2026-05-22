@@ -1,0 +1,42 @@
+---
+title: ecommerce_invoice_emails
+description: >
+  Log slanja e-mail obavještenja o fakturama generisanim iz e-commerce naloga.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Log slanja e-mail obavještenja o fakturama generisanim iz e-commerce naloga. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| InvoiceYear | int | NOT NULL | — | Godina fakture |
+| InvoiceUnitID | int | NOT NULL | — | FK → unit (faktura) |
+| InvoiceOrderTypeID | int | NOT NULL | — | FK → tip naloga (faktura) |
+| InvoiceOrder | int | NOT NULL | — | Broj naloga fakture |
+| IntegrationConfigID | int | NOT NULL | — | FK → ecommerce_integration_configs |
+| CustomerEmail | varchar(255) | NOT NULL | — | Email primatelja |
+| CustomerName | varchar(255) | NULL | NULL | Naziv kupca |
+| InvoiceNumber | varchar(50) | NULL | NULL | Broj fakture (prikaz) |
+| VerificationUrl | text | NULL | NULL | URL za verifikaciju fakture |
+| SentAt | datetime | NOT NULL | current_timestamp() | Datum/vrijeme slanja |
+| EmailStatus | enum | NULL | sent | Status slanja (sent/failed) |
+| EmailID | varchar(100) | NULL | NULL | ID emaila od mail providera |
+| EmailErrorMessage | text | NULL | NULL | Poruka greške slanja |
+| CreatedAt | datetime | NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | datetime | NULL | current_timestamp() | Row last update timestamp |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| unique_invoice_send (UNIQUE) | InvoiceYear, InvoiceUnitID, InvoiceOrderTypeID, InvoiceOrder, IntegrationConfigID | UNIQUE | Sprječava duplo slanje fakture |
+| idx_customer_email | CustomerEmail | INDEX |  |
+| idx_invoice_composite | InvoiceYear, InvoiceUnitID, InvoiceOrderTypeID, InvoiceOrder | INDEX |  |
+| idx_sent_at | SentAt | INDEX |  |
+| idx_email_status | EmailStatus | INDEX |  |
+| idx_integration_config | IntegrationConfigID | INDEX |  |

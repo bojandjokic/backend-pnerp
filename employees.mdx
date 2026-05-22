@@ -1,0 +1,54 @@
+---
+title: employees
+description: >
+  Registar zaposlenika sa ličnim, profesionalnim i ugovornim podacima.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Registar zaposlenika sa ličnim, profesionalnim i ugovornim podacima. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | mediumint | NOT NULL | IDENTITY | PK — auto-increment |
+| Surname | varchar(45) | NOT NULL | — | Prezime |
+| FatherName | varchar(20) | NULL | NULL | Ime oca |
+| Name | varchar(20) | NOT NULL | — | Ime |
+| JMBG | char(13) | NOT NULL | — | JMBG |
+| Sex | tinyint | NOT NULL | — | Spol |
+| DOB | date | NOT NULL | — | Datum rođenja |
+| CityBirthID | mediumint | NOT NULL | — | FK → city (rođenje) |
+| MunicipalityBirthID | mediumint | NULL | NULL | FK → municipality (rođenje) |
+| CityResidenceID | mediumint | NULL | NULL | FK → city (prebivalište) |
+| Address | varchar(70) | NULL | NULL | Adresa |
+| MunicipalityResidenceID | mediumint | NULL | NULL | FK → municipality (prebivalište) |
+| CityJobID | mediumint | NULL | NULL | FK → city (radno mjesto) |
+| MunicipalityJobID | mediumint | NULL | NULL | FK → municipality (radno mjesto) |
+| ProfessionID | smallint | NOT NULL | — | FK → profession |
+| QualificationsID | tinyint | NOT NULL | — | FK → qualifications |
+| JobsID | smallint | NULL | NULL | FK → jobs |
+| WorkTime | tinyint | NOT NULL | — | Radno vrijeme (sati) |
+| YearYOS | tinyint | NULL | NULL | Godine staža (godine) |
+| MonthYOS | tinyint | NULL | NULL | Godine staža (mjeseci) |
+| DaysYOS | tinyint | NULL | NULL | Godine staža (dani) |
+| IsDetermined | tinyint | NULL | NULL | Određeno radno mjesto |
+| IsInvalid | tinyint | NULL | NULL | Invaliditet |
+| CustomerCompanyID | mediumint | NULL | NULL | FK → customer company |
+| IsSupplementary | tinyint | NULL | NULL | Dopunski rad |
+| DateStart | date | NOT NULL | — | Datum početka zaposlenja |
+| DateStop | date | NULL | NULL | Datum završetka zaposlenja |
+| Reason | varchar(45) | NULL | NULL | Razlog prestanka |
+| ActivityID | smallint | NULL | NULL | FK → activity |
+| SerialNumber | varchar(20) | NOT NULL | — | Serijski broj radne knjižice |
+| RegistrationNumber | varchar(20) | NULL | NULL | Matični broj zaposlenika |
+| MunicipalityWorkBookID | mediumint | NULL | NULL | FK → municipality (radna knjižica) |
+| DisciplinaryAction | varchar(45) | NULL | NULL | Disciplinska mjera |
+| Other | varchar(45) | NULL | NULL | Ostalo |
+| CreatedBy | mediumint | NOT NULL | — | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |

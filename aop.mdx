@@ -1,0 +1,33 @@
+---
+title: aop
+description: >
+  AOP pozicije (Godišnji operativni plan). Četverocifreni kod sa nazivom i opcionalnom referencom na avansku poziciju.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | AOP pozicije (Godišnji operativni plan). Četverocifreni kod sa nazivom i opcionalnom referencom na avansku poziciju. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | smallint | NOT NULL | IDENTITY | PK — auto-increment |
+| Code | varchar(4) | NOT NULL | — | Četverocifreni AOP kod (UNIQUE po IsActive) |
+| Name | varchar(200) | NOT NULL | — | Naziv AOP pozicije |
+| AdvanceID | smallint | NULL | NULL | FK → avansna AOP pozicija |
+| CreatedBy | mediumint | NOT NULL | — | FK → korisnik (kreator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → korisnik (posljednja izmjena) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Timestamp kreiranja |
+| UpdatedAt | timestamp | NULL | NULL | Timestamp izmjene |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = aktivan) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| **Code (UNIQUE)** | Code, IsActive | UNIQUE | Jedinstvenost koda po aktivnom statusu |
+| **Name** | Name | INDEX |  |
+| **AdvanceID** | AdvanceID | INDEX |  |
+| **IsActive** | IsActive | INDEX |  |

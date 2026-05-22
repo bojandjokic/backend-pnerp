@@ -1,0 +1,25 @@
+---
+title: agency
+description: >
+  Šifarnik agencija. Petocifreni kod i naziv agencije. Nema standardnih audit kolona — lagana lookup tabela.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Šifarnik agencija. Petocifreni kod i naziv agencije. Nema standardnih audit kolona — lagana lookup tabela. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | smallint | NOT NULL | IDENTITY | PK — auto-increment |
+| Code | char(5) | NULL | NULL | Petocifreni kod agencije (UNIQUE) |
+| Name | varchar(220) | NULL | NULL | Naziv agencije (UNIQUE) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| **Code (UNIQUE)** | Code | UNIQUE |  |
+| **Name (UNIQUE)** | Name | UNIQUE |  |

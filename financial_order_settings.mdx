@@ -1,0 +1,60 @@
+---
+title: financial_order_settings
+description: >
+  Konfiguracija vidljivosti i obaveznosti polja finansijskog naloga po entitetu, tipu konta, kompaniji i korisniku.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Konfiguracija vidljivosti i obaveznosti polja finansijskog naloga po entitetu, tipu konta, kompaniji i korisniku. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | smallint | NOT NULL | IDENTITY | PK — auto-increment |
+| EntityID | tinyint | NOT NULL | — | FK → entity |
+| AccountTypeID | smallint | NOT NULL | — | FK → account_type |
+| CompanyID | smallint | NULL | NULL | FK → company |
+| UserID | mediumint | NULL | NULL | FK → user |
+| DueDate | tinyint | NULL | NULL | Prikaz: datum dospijeća |
+| DueDateRequired | tinyint | NULL | NULL | Obavezno: datum dospijeća |
+| Description | tinyint | NULL | NULL | Prikaz: opis |
+| DescriptionRequired | tinyint | NULL | NULL | Obavezno: opis |
+| Customer | tinyint | NULL | NULL | Prikaz: kupac |
+| CustomerRequired | tinyint | NULL | NULL | Obavezno: kupac |
+| InvoiceNo | tinyint | NULL | NULL | Prikaz: broj fakture |
+| InvoiceNoRequired | tinyint | NULL | NULL | Obavezno: broj fakture |
+| ImportNo | tinyint | NULL | NULL | Prikaz: broj uvoza |
+| ImportNoRequired | tinyint | NULL | NULL | Obavezno: broj uvoza |
+| Unit | tinyint | NULL | NULL | Prikaz: jedinica |
+| UnitRequired | tinyint | NULL | NULL | Obavezno: jedinica |
+| PurchaseInvoiceType | tinyint | NULL | NULL | Prikaz: tip ulazne fakture |
+| PurchaseInvoiceTypeRequired | tinyint | NULL | NULL | Obavezno: tip ulazne fakture |
+| SalesInvoiceType | tinyint | NULL | NULL | Prikaz: tip izlazne fakture |
+| SalesInvoiceTypeRequired | tinyint | NULL | NULL | Obavezno: tip izlazne fakture |
+| TaxType | tinyint | NULL | NULL | Prikaz: vrsta poreza |
+| TaxTypeRequired | tinyint | NULL | NULL | Obavezno: vrsta poreza |
+| Owe | tinyint | NULL | NULL | Prikaz: duguje |
+| OweRequired | tinyint | NULL | NULL | Obavezno: duguje |
+| Claim | tinyint | NULL | NULL | Prikaz: potražuje |
+| ClaimRequired | tinyint | NULL | NULL | Obavezno: potražuje |
+| Entity | tinyint | NULL | NULL | Prikaz: entitet |
+| EntityRequired | tinyint | NULL | NULL | Obavezno: entitet |
+| BookForeignSuppliers | tinyint | NULL | NULL | Knjiženje stranih dobavljača |
+| CreatedBy | mediumint | NULL | NULL | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| EntityID | EntityID, AccountTypeID, CompanyID, UserID, IsActive | INDEX | Filtriranje po kombinaciji entitet/tip/kompanija/korisnik |
+| AccountTypeID | AccountTypeID | INDEX |  |
+| CompanyID | CompanyID | INDEX |  |
+| UserID | UserID | INDEX |  |
+| IsActive | IsActive | INDEX |  |

@@ -1,0 +1,31 @@
+---
+title: cost
+description: >
+  Sifarnik troskova po kompaniji. Definira kategorije ili vrste troskova.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Sifarnik troskova po kompaniji. Definira kategorije ili vrste troskova. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | smallint | NOT NULL | IDENTITY | PK — auto-increment |
+| CompanyID | smallint | NOT NULL |  | FK → company |
+| Name | varchar(45) | NOT NULL |  | Naziv troska |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| CompanyID (UNIQUE) | CompanyID, Name, IsActive | UNIQUE | Jedinstvenost troska po kompaniji |
+| IsActive | IsActive | INDEX |  |
+| Name | Name | INDEX |  |

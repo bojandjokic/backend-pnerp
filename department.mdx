@@ -1,0 +1,36 @@
+---
+title: department
+description: >
+  Šifarnik odjeljenja preduzeća. Vezuje se za poslovnu jedinicu (subunit) i opcionalno za grad.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Šifarnik odjeljenja preduzeća. Vezuje se za poslovnu jedinicu (subunit) i opcionalno za grad. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | smallint | NOT NULL | IDENTITY | PK — auto-increment |
+| SubunitID | smallint | NOT NULL | — | FK → subunit |
+| Name | varchar(70) | NOT NULL | — | Naziv odjeljenja |
+| Address | varchar(70) | NULL | NULL | Adresa odjeljenja |
+| CityID | mediumint | NULL | NULL | FK → city |
+| Phone1 | varchar(20) | NULL | NULL | Telefon 1 |
+| Phone2 | varchar(20) | NULL | NULL | Telefon 2 |
+| Email | varchar(50) | NULL | NULL | E-mail |
+| CreatedBy | mediumint | NOT NULL | — | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| SubunitID (UNIQUE) | SubunitID, Name, IsActive | UNIQUE | Jedinstvenost odjeljenja po poslovnoj jedinici |
+| CityID | CityID | INDEX |  |
+| Name | Name | INDEX |  |

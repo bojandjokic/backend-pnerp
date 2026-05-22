@@ -1,0 +1,35 @@
+---
+title: bill_of_material
+description: >
+  Sastavnica materijala (jednostavna verzija). Vezuje nalog i proizvod sa količinom po kompaniji. Prethodnik ili alternativa detaljnoj tabeli bill_of_materials.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Sastavnica materijala (jednostavna verzija). Vezuje nalog i proizvod sa količinom po kompaniji. Prethodnik ili alternativa detaljnoj tabeli bill_of_materials. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| CompanyID | smallint | NOT NULL | — | FK → kompanija |
+| Order | mediumint | NOT NULL | — | FK → radni nalog |
+| ProductID | mediumint | NOT NULL | — | FK → proizvod/materijal |
+| Description | text | NULL | NULL | Opis stavke sastavnice |
+| Qty | decimal(12,5) | NOT NULL | — | Količina (5 decimala) |
+| CreatedBy | mediumint | NOT NULL | — | FK → korisnik (kreator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → korisnik (posljednja izmjena) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Timestamp kreiranja |
+| UpdatedAt | timestamp | NULL | NULL | Timestamp izmjene |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = aktivan) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| **CompanyID (UNIQUE)** | CompanyID, Order, IsActive | UNIQUE | Jedinstvenost naloga po kompaniji |
+| **Order** | Order | INDEX |  |
+| **ProductID** | ProductID | INDEX |  |
+| **IsActive** | IsActive | INDEX |  |

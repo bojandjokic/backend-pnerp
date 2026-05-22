@@ -1,0 +1,38 @@
+---
+title: city
+description: >
+  Sifarnik mjesta / gradova. Svako mjesto vezano je za opcinu, entitet i drzavu.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Sifarnik mjesta / gradova. Svako mjesto vezano je za opcinu, entitet i drzavu. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | mediumint | NOT NULL | IDENTITY | PK — auto-increment |
+| Name | varchar(50) | NOT NULL |  | Naziv mjesta |
+| MunicipalityID | mediumint | NULL | NULL | FK → municipality |
+| ZipCode | char(5) | NOT NULL |  | Postanski broj |
+| EntityID | tinyint | NOT NULL |  | FK → entity |
+| CountryID | tinyint | NOT NULL |  | FK → country |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| NameUnique (UNIQUE) | Name, CountryID, ZipCode, IsActive | UNIQUE | Sprjecava duplikat mjesta |
+| MunicipalityID | MunicipalityID | INDEX |  |
+| CountryID | CountryID | INDEX |  |
+| EntityID | EntityID | INDEX |  |
+| Name | Name | INDEX |  |
+| ZipCode | ZipCode | INDEX |  |
+| IsActive | IsActive | INDEX |  |

@@ -1,0 +1,44 @@
+---
+title: credit_notes
+description: >
+  Stavke knjiznih odobrenja. Svaka stavka sadrzi iznose originalnog racuna i odobrene razlike.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Stavke knjiznih odobrenja. Svaka stavka sadrzi iznose originalnog racuna i odobrene razlike. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| OrderID | int | NOT NULL |  | FK → credit_note |
+| InvoiceOrder | mediumint | NOT NULL |  | Redni broj originalnog racuna |
+| OrdinalNumber | smallint | NOT NULL |  | Redni broj stavke |
+| Date | date | NOT NULL |  | Datum stavke |
+| InvoiceAmount | double(14,2) | NULL | NULL | Iznos originalnog racuna |
+| Amount | double(14,2) | NULL | NULL | Odobreni iznos |
+| AmountDifference | double(14,2) | NULL | NULL | Razlika iznosa |
+| InvoiceTaxAmount | double(9,2) | NULL | NULL | Porez na originalnom racunu |
+| TaxAmount | double(9,2) | NULL | NULL | Odobreni porez |
+| TaxAmountDifference | double(9,2) | NULL | NULL | Razlika poreza |
+| DiscountRate | float(6,2) | NULL | NULL | Stopa popusta (%) |
+| DiscountAmount | double(9,2) | NULL | NULL | Iznos popusta |
+| TotalDifference | double(14,2) | NULL | NULL | Ukupna razlika |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| OrderID (UNIQUE) | OrderID, OrdinalNumber, IsActive | UNIQUE | Jedinstvenost stavke po nalogu |
+| OrdinalNumber | OrdinalNumber | INDEX |  |
+| IsActive | IsActive | INDEX |  |
+| InvoiceOrder | InvoiceOrder | INDEX |  |
+| Date | Date | INDEX |  |

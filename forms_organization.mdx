@@ -1,0 +1,26 @@
+---
+title: forms_organization
+description: >
+  Šifarnik oblika organizacije preduzeća (d.o.o., d.d., s.p. i sl.).
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Šifarnik oblika organizacije preduzeća (d.o.o., d.d., s.p. i sl.). |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | tinyint | NOT NULL | IDENTITY | PK — auto-increment |
+| Name | varchar(60) | NOT NULL | — | Naziv oblika organizacije |
+| Abbreviation | varchar(8) | NOT NULL | — | Skraćenica |
+| Entrepreneur | tinyint | NULL | NULL | Je li poduzetnik |
+| CreatedBy | mediumint | NOT NULL | — | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+Page

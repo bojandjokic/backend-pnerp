@@ -1,0 +1,29 @@
+---
+title: additional_sheet
+description: >
+  Šifarnik dodatnih listova (obrazaca). Jednocifreni kod i oznaka sa nazivom obrasca.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Šifarnik dodatnih listova (obrazaca). Jednocifreni kod i oznaka sa nazivom obrasca. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | tinyint | NOT NULL | IDENTITY | PK — auto-increment |
+| Code | varchar(1) | NOT NULL | — | Jednocifreni kod obrasca |
+| Mark | varchar(4) | NOT NULL | — | Oznaka obrasca (do 4 znaka) |
+| Name | varchar(100) | NOT NULL | — | Naziv obrasca |
+| CreatedBy | mediumint | NOT NULL | — | FK → korisnik (kreator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → korisnik (posljednja izmjena) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Timestamp kreiranja |
+| UpdatedAt | timestamp | NULL | NULL | Timestamp izmjene |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = aktivan) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |

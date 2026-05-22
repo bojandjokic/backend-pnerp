@@ -1,0 +1,42 @@
+---
+title: cash_box
+description: >
+  Blagajne / POS terminali. Definira konfiguraciju svakog POS uredaja (IP, port, token, pin) i njegovu vezu s poslovnom jedinicom.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Blagajne / POS terminali. Definira konfiguraciju svakog POS uredaja (IP, port, token, pin) i njegovu vezu s poslovnom jedinicom. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | smallint | NOT NULL | IDENTITY | PK — auto-increment |
+| CompanyID | smallint | NOT NULL |  | FK → company |
+| UnitID | smallint | NOT NULL |  | FK → unit |
+| Name | varchar(45) | NOT NULL |  | Naziv blagajne |
+| IpAdress | varchar(255) | NOT NULL |  | IP adresa servera |
+| Port | smallint | NOT NULL |  | Port servera |
+| Token | char(32) | NOT NULL |  | Autentifikacijski token |
+| Pin | char(4) | NULL | NULL | PIN blagajne |
+| IpAdressCashBox | varchar(255) | NULL | NULL | IP adresa POS terminala |
+| PortCashBox | smallint | NULL | NULL | Port POS terminala |
+| InvoiceType | varchar(10) | NULL | NULL | Vrsta racuna |
+| PaymentType | varchar(15) | NULL | NULL | Vrsta placanja |
+| Print | tinyint | NULL | NULL | Flag: ispis racuna |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| CompanyID (UNIQUE) | CompanyID, UnitID, IsActive | UNIQUE | Sprjecava duplikate po kompaniji i jedinici |
+| UnitID | UnitID | INDEX |  |
+| IsActive | IsActive | INDEX |  |
+| Name | Name | INDEX |  |

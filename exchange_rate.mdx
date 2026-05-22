@@ -1,0 +1,33 @@
+---
+title: exchange_rate
+description: >
+  Šifarnik deviznih kurseva po valuti i datumu.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Šifarnik deviznih kurseva po valuti i datumu. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | mediumint | NOT NULL | IDENTITY | PK — auto-increment |
+| CurrencyID | tinyint | NOT NULL | — | FK → currency |
+| Date | date | NOT NULL | — | Datum kursa |
+| Unit | tinyint | NOT NULL | 1 | Jedinica (npr. 1 ili 100) |
+| Value | double(12,6) | NULL | NULL | Vrijednost kursa |
+| CreatedBy | mediumint | NOT NULL | — | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NOT NULL | 0000-00-00 | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| CurrencyID (UNIQUE) | CurrencyID, Date, IsActive | UNIQUE | Jedinstvenost kursa po valuti i datumu |
+| Date | Date | INDEX |  |
+| IsActive | IsActive | INDEX |  |

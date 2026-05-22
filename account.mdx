@@ -1,0 +1,77 @@
+---
+title: account
+description: >
+  Kontni plan. Čuva kodove konta glavne knjige sa mapiranjima otvaranja salda i AOP (Godišnji operativni plan) po periodima — standardni, AX, GT i KP.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Kontni plan. Čuva kodove konta glavne knjige sa mapiranjima otvaranja salda i AOP (Godišnji operativni plan) po periodima — standardni, AX, GT i KP. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | smallint | NOT NULL | IDENTITY | PK — auto-increment |
+| EntityID | tinyint | NOT NULL | — | FK → entity |
+| Account | varchar(8) | NOT NULL | — | Account code (unique per entity+IsActive) |
+| Name | varchar(200) | NOT NULL | — | Account display name |
+| AOPID | smallint | NULL | NULL | FK → AOP standard period |
+| OpeningBalance | tinyint | NULL | NULL | Flag: has opening balance |
+| Owe | tinyint | NULL | NULL | Flag: debit side active |
+| Claim | tinyint | NULL | NULL | Flag: credit side active |
+| OpeningBalanceNegative | tinyint | NULL | NULL | Flag: opening balance is negative |
+| OweNegative | tinyint | NULL | NULL | Flag: debit negative |
+| ClaimNegative | tinyint | NULL | NULL | Flag: credit negative |
+| ValueAdjustment | tinyint | NULL | NULL | Flag: value adjustment allowed |
+| AOPAXID | smallint | NULL | NULL | FK → AOP AX period |
+| OpeningBalanceAX | tinyint | NULL | NULL | Opening balance flag — AX period |
+| OpeningBalanceAXNegative | tinyint | NULL | NULL | Opening balance negative — AX period |
+| OweAX | tinyint | NULL | NULL | Debit flag — AX period |
+| OweAXNegative | tinyint | NULL | NULL | Debit negative — AX period |
+| ClaimAX | tinyint | NULL | NULL | Credit flag — AX period |
+| ClaimAXNegative | tinyint | NULL | NULL | Credit negative — AX period |
+| AOPGTID | smallint | NULL | NULL | FK → AOP GT period |
+| OpeningBalanceGT | tinyint | NULL | NULL | Opening balance flag — GT period |
+| OweGT | tinyint | NULL | NULL | Debit flag — GT period |
+| ClaimGT | tinyint | NULL | NULL | Credit flag — GT period |
+| OpeningBalanceGTNegative | tinyint | NULL | NULL | Opening balance negative — GT period |
+| OweGTNegative | tinyint | NULL | NULL | Debit negative — GT period |
+| ClaimGTNegative | tinyint | NULL | NULL | Credit negative — GT period |
+| AOPKPID | smallint | NULL | NULL | FK → AOP KP period |
+| OpeningBalanceKP | tinyint | NULL | NULL | Opening balance flag — KP period |
+| OweKP | tinyint | NULL | NULL | Debit flag — KP period |
+| ClaimKP | tinyint | NULL | NULL | Credit flag — KP period |
+| CustomerRequired | tinyint | NULL | NULL | Flag: customer reference required on posting |
+| CustomerEntityID | tinyint | NULL | NULL | Customer entity scope restriction |
+| ObligatedVATID | tinyint | NULL | NULL | VAT obligation type reference |
+| KUFNo | tinyint | NULL | NULL | KUF (purchase journal) number |
+| ClassID | tinyint | NULL | NULL | Account class grouping |
+| SyntheticsID | smallint | NULL | NULL | Synthetic account grouping |
+| InvoiceTypeID | tinyint | NULL | NULL | Default invoice type for this account |
+| CreatedBy | mediumint | NOT NULL | — | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| **Entity (UNIQUE)** | EntityID, Account, IsActive | UNIQUE | Prevents duplicate account codes per entity |
+| **Account** | Account | INDEX |  |
+| **Name** | Name | INDEX |  |
+| **AOPID** | AOPID | INDEX |  |
+| **AOPAXID** | AOPAXID | INDEX |  |
+| **AOPGTID** | AOPGTID | INDEX |  |
+| **AOPKPID** | AOPKPID | INDEX |  |
+| **Class** | ClassID | INDEX |  |
+| **Synthetics** | SyntheticsID | INDEX |  |
+| **InvoiceTypeID** | InvoiceTypeID | INDEX |  |
+| **ObligatedVATID** | ObligatedVATID | INDEX |  |
+| **CustomerRequired** | CustomerRequired | INDEX |  |
+| **CustomerEntityID** | CustomerEntityID | INDEX |  |
+| **KUFNo** | KUFNo | INDEX |  |
+| **IsActive** | IsActive | INDEX |  |

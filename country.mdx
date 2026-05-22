@@ -1,0 +1,30 @@
+---
+title: country
+description: >
+  Sifarnik drzava. Sadrzi ISO kodove i numericke kodove za svaku drzavu.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Sifarnik drzava. Sadrzi ISO kodove i numericke kodove za svaku drzavu. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | tinyint | NOT NULL | IDENTITY | PK — auto-increment |
+| Name | varchar(50) | NOT NULL |  | Naziv drzave |
+| Code2 | char(2) | NOT NULL |  | ISO 3166-1 alpha-2 |
+| Code3 | char(3) | NOT NULL |  | ISO 3166-1 alpha-3 |
+| NumericCode | smallint | NOT NULL |  | ISO 3166-1 numericni kod |
+| CreatedBy | mediumint | NOT NULL |  | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |

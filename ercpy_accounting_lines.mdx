@@ -1,0 +1,36 @@
+---
+title: ercpy_accounting_lines
+description: >
+  Stavke računovodstvenih naloga iz ERCPY integracije sa kontima i iznosima.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Stavke računovodstvenih naloga iz ERCPY integracije sa kontima i iznosima. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | mediumint | NOT NULL | IDENTITY | PK — auto-increment |
+| OrderID | mediumint | NOT NULL | — | FK → ercpy_accounting |
+| account | varchar(8) | NOT NULL | — | Konto (kod) |
+| accountID | smallint | NOT NULL | — | FK → account |
+| debit | double(14,2) | NULL | NULL | Iznos duguje |
+| credit | double(14,2) | NULL | NULL | Iznos potražuje |
+| partner | varchar(45) | NULL | NULL | Naziv poslovnog partnera |
+| CreatedBy | mediumint | NOT NULL | — | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| OrderID | OrderID, ID | INDEX | Stavke po nalogu |
+| accountID | accountID | INDEX |  |
+| account | account | INDEX |  |
+| IsActive | IsActive | INDEX |  |

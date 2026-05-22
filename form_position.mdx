@@ -1,0 +1,26 @@
+---
+title: form_position
+description: >
+  Korisnički zapis pozicije forme na ekranu (X/Y koordinate) za pamćenje rasporeda UI.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Korisnički zapis pozicije forme na ekranu (X/Y koordinate) za pamćenje rasporeda UI. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | smallint | NOT NULL | IDENTITY | PK — auto-increment |
+| UserID | mediumint | NOT NULL | — | FK → user |
+| FormName | varchar(120) | NOT NULL | — | Naziv forme |
+| X | smallint | NOT NULL | — | X koordinata |
+| Y | smallint | NOT NULL | — | Y koordinata |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| FormPosition (UNIQUE) | UserID, FormName | UNIQUE | Jedinstvenost pozicije forme po korisniku |

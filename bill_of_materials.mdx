@@ -1,0 +1,183 @@
+---
+title: bill_of_materials
+description: >
+  Stavke sastavnice materijala (detaljna verzija). Svaka stavka nosi redni broj, jedinicu mjere, cijenu i iznos. Koristi se za obračun troškova naloga.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Stavke sastavnice materijala (detaljna verzija). Svaka stavka nosi redni broj, jedinicu mjere, cijenu i iznos. Koristi se za obračun troškova naloga. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| OrderID | int | NOT NULL | — | FK → radni nalog |
+| OrdinalNumber | smallint | NOT NULL | — | Redni broj stavke u nalogu |
+| UnitID | smallint | NULL | NULL | FK → jedinica mjere |
+| ProductID | mediumint | NOT NULL | — | FK → proizvod/materijal |
+| Description | varchar(255) | NULL | NULL | Opis stavke |
+| Qty | decimal(12,5) | NOT NULL | — | Količina (5 decimala) |
+| UnitPrice | decimal(10,3) | NOT NULL | — | Cijena po jedinici (3 decimale) |
+| Amount | decimal(14,2) | NOT NULL | — | Ukupan iznos stavke (2 decimale) |
+| CreatedBy | mediumint | NOT NULL | — | FK → korisnik (kreator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → korisnik (posljednja izmjena) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Timestamp kreiranja |
+| UpdatedAt | timestamp | NULL | NULL | Timestamp izmjene |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = aktivan) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| **OrderID (UNIQUE)** | OrderID, OrdinalNumber, IsActive | UNIQUE | Jedinstvenost rednog broja stavke po nalogu |
+| **OrdinalNumber** | OrdinalNumber | INDEX |  |
+| **ProductID** | ProductID | INDEX |  |
+| **UnitID** | UnitID | INDEX |  |
+| **IsActive** | IsActive | INDEX |  |
+
+pnerp.book_expenditure
+
+Schema
+pnerp
+
+Engine
+MariaDB / InnoDB
+
+Description
+
+Šifarnik osnovnih kategorija troškova. Predstavlja najviši nivo grupisanja rashoda.
+
+Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| ID | tinyint | NOT NULL |  | PK — ručni ID |
+| Name | varchar(45) | NOT NULL |  | Naziv kategorije |
+
+Indexes
+
+| Index Name | Columns | Type | Notes |
+| --- | --- | --- | --- |
+| Name | Name | INDEX |  |
+
+pnerp.book_expenditure_expense
+
+Schema
+pnerp
+
+Engine
+MariaDB / InnoDB
+
+Description
+
+Detaljni šifarnik troškova unutar kategorija.
+
+Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| ID | tinyint | NOT NULL | IDENTITY | PK — auto-increment |
+| Code | tinyint | NOT NULL |  | Interni kod |
+| Name | varchar(45) | NOT NULL |  | Naziv |
+| CreatedBy | mediumint | NOT NULL |  | FK → user |
+| UpdatedBy | mediumint | NULL | NULL | FK → user |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() |  |
+| UpdatedAt | timestamp | NULL | NULL |  |
+| IsActive | tinyint | NULL | 1 | Soft delete |
+
+Indexes
+
+| Index Name | Columns | Type | Notes |
+| --- | --- | --- | --- |
+| Name (UNIQUE) | Name, IsActive | UNIQUE |  |
+| Code | Code, IsActive | INDEX |  |
+| Name_2 | Name | INDEX |  |
+
+pnerp.book_revenue
+
+Schema
+pnerp
+
+Engine
+MariaDB / InnoDB
+
+Description
+
+Šifarnik osnovnih kategorija prihoda.
+
+Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| ID | tinyint | NOT NULL |  | PK |
+| Name | varchar(45) | NOT NULL |  | Naziv |
+
+Indexes
+
+| Index Name | Columns | Type | Notes |
+| --- | --- | --- | --- |
+| Name | Name | INDEX |  |
+
+pnerp.book_revenue_expense
+
+Schema
+pnerp
+
+Engine
+MariaDB / InnoDB
+
+Description
+
+Detaljni šifarnik prihoda.
+
+Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| ID | tinyint | NOT NULL | IDENTITY | PK |
+| Code | tinyint | NOT NULL |  |  |
+| Name | varchar(45) | NOT NULL |  |  |
+| CreatedBy | mediumint | NOT NULL |  | FK → user |
+| UpdatedBy | mediumint | NULL | NULL |  |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() |  |
+| UpdatedAt | timestamp | NULL | NULL |  |
+| IsActive | tinyint | NULL | 1 |  |
+
+Indexes
+
+| Index Name | Columns | Type | Notes |
+| --- | --- | --- | --- |
+
+pnerp.business_network
+
+Schema
+pnerp
+
+Engine
+MariaDB / InnoDB
+
+Description
+
+Šifarnik poslovnih mreža / grupacija.
+
+Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| ID | tinyint | NOT NULL | IDENTITY | PK |
+| Name | varchar(70) | NOT NULL |  | Naziv |
+| CreatedBy | mediumint | NOT NULL |  | FK → user |
+| UpdatedBy | mediumint | NULL | NULL |  |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() |  |
+| UpdatedAt | timestamp | NULL | NULL |  |
+| isActive | tinyint | NULL | 1 |  |
+
+Indexes
+
+| Index Name | Columns | Type | Notes |
+| --- | --- | --- | --- |
+| Name | Name | INDEX |  |
+| isActive | isActive | INDEX |  |

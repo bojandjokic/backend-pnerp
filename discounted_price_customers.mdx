@@ -1,0 +1,35 @@
+---
+title: discounted_price_customers
+description: >
+  Stavke diskontnih cijena — artikli s diskontnom stopom ili fiksnom cijenom unutar narudžbe.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Stavke diskontnih cijena — artikli s diskontnom stopom ili fiksnom cijenom unutar narudžbe. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| OrderID | int | NOT NULL | — | FK → discounted_price_customer |
+| OrdinalNumber | smallint | NOT NULL | — | Redni broj stavke |
+| ProductID | mediumint | NOT NULL | — | FK → product |
+| Description | varchar(100) | NULL | NULL | Opis stavke |
+| DiscountRate | float(6,2) | NULL | NULL | Stopa popusta (%) |
+| UnitPrice | double(10,3) | NULL | NULL | Fiksna cijena artikla |
+| CreatedBy | mediumint | NOT NULL | — | FK → user (creator) |
+| UpdatedBy | mediumint | NULL | NULL | FK → user (last updater) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+| UpdatedAt | timestamp | NULL | NULL | Row last update timestamp |
+| IsActive | tinyint | NULL | 1 | Soft delete (1 = active) |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| OrderID (UNIQUE) | OrderID, OrdinalNumber, IsActive | UNIQUE | Jedinstvenost stavke po narudžbi |
+| ProductID | ProductID | INDEX |  |
+| OrdinalNumber | OrdinalNumber | INDEX |  |

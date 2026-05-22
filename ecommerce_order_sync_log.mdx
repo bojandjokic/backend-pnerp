@@ -1,0 +1,45 @@
+---
+title: ecommerce_order_sync_log
+description: >
+  Log sinhronizacije e-commerce naloga u ERP fakture sa praćenjem pokušaja i grešaka.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Log sinhronizacije e-commerce naloga u ERP fakture sa praćenjem pokušaja i grešaka. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| IntegrationConfigID | int | NOT NULL | — | FK → ecommerce_integration_configs |
+| ExternalOrderID | varchar(255) | NOT NULL | — | ID naloga na platformi |
+| ExternalOrderNumber | varchar(255) | NULL | NULL | Broj naloga na platformi |
+| ExternalOrderData | longtext | NULL | NULL | JSON payload eksternog naloga |
+| InvoiceID | int | NULL | NULL | FK → faktura (interni ID) |
+| InvoiceYear | int | NULL | NULL | Godina fakture |
+| InvoiceUnitID | int | NULL | NULL | FK → unit (faktura) |
+| InvoiceOrderTypeID | int | NULL | NULL | FK → tip naloga (faktura) |
+| InvoiceOrderNumber | int | NULL | NULL | Broj fakture |
+| CustomerID | int | NULL | NULL | FK → customer |
+| SyncStatus | enum | NULL | pending | Status sinhronizacije |
+| SyncAttempts | int | NULL | 0 | Broj pokušaja sinhronizacije |
+| MaxRetryAttempts | int | NULL | 3 | Max. broj pokušaja |
+| ErrorMessage | text | NULL | NULL | Poruka greške |
+| ErrorStack | text | NULL | NULL | Stack trace greške |
+| OrderCreatedAt | datetime | NULL | NULL | Datum kreiranja naloga na platformi |
+| FirstAttemptAt | datetime | NULL | NULL | Datum prvog pokušaja sinhronizacije |
+| LastAttemptAt | datetime | NULL | NULL | Datum posljednjeg pokušaja |
+| SyncedAt | datetime | NULL | NULL | Datum uspješne sinhronizacije |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| unique_order_per_integration (UNIQUE) | IntegrationConfigID, ExternalOrderID | UNIQUE | Jedinstvenost naloga po integraciji |
+| idx_sync_status | SyncStatus, LastAttemptAt | INDEX | Filtriranje naloga za ponovni pokušaj |
+| idx_invoice_ref | InvoiceYear, InvoiceUnitID, InvoiceOrderTypeID, InvoiceOrderNumber | INDEX |  |
+| idx_order_created | OrderCreatedAt | INDEX |  |
+| idx_customer | CustomerID | INDEX |  |

@@ -1,0 +1,51 @@
+---
+title: error
+description: >
+  Sistemski log grešaka aplikacije — server, klijent, stack trace i kontekst korisnika.
+---
+
+| Schema | pnerp |
+| --- | --- |
+| Engine | MariaDB / InnoDB |
+| Description | Sistemski log grešaka aplikacije — server, klijent, stack trace i kontekst korisnika. |
+
+## Columns
+
+| Column | Type | Nullable | Default | Notes |
+| --- | --- | --- | --- | --- |
+| **ID** | int | NOT NULL | IDENTITY | PK — auto-increment |
+| Helper | varchar(20) | NULL | NULL | Helper identifikator |
+| Number | int | NULL | NULL | Broj greške |
+| Severity | smallint | NULL | NULL | Ozbiljnost greške |
+| State | smallint | NULL | NULL | Stanje greške |
+| Error | text | NULL | NULL | Tekst greške |
+| Message | text | NULL | NULL | Poruka greške |
+| Line | smallint | NULL | NULL | Linija koda |
+| Procedure | varchar(128) | NULL | NULL | Procedura/metoda |
+| HostName | varchar(20) | NULL | NULL | Hostname servera |
+| DataBase | varchar(20) | NULL | NULL | Naziv baze |
+| MySQLUserName | varchar(45) | NULL | NULL | MySQL korisnik |
+| Name | varchar(45) | NULL | NULL | Naziv greške |
+| Status | smallint | NULL | NULL | HTTP status kod |
+| StatusText | varchar(45) | NULL | NULL | HTTP status tekst |
+| URL | varchar(254) | NULL | NULL | URL gdje je greška nastala |
+| Stack | text | NULL | NULL | Stack trace |
+| IpAddress | int | NULL | NULL | IP adresa klijenta |
+| Browser | varchar(45) | NULL | NULL | Browser klijenta |
+| OS | varchar(45) | NULL | NULL | OS klijenta |
+| Path | varchar(254) | NULL | NULL | Putanja zahtjeva |
+| TranslatedPath | varchar(254) | NULL | NULL | Prevedena putanja |
+| Year | year | NULL | NULL | Godina greške |
+| CompanyID | smallint | NULL | NULL | FK → company |
+| CreatedBy | mediumint | NULL | NULL | FK → user (creator) |
+| CreatedAt | timestamp | NOT NULL | current_timestamp() | Row creation timestamp |
+
+## Indexes
+
+| Index Name | ## Columns | Type | Notes |
+| --- | --- | --- | --- |
+| CreatedAt | CreatedAt | INDEX |  |
+| Year | Year | INDEX |  |
+| IpAddress | IpAddress | INDEX |  |
+| CompanyID | CompanyID | INDEX |  |
+| CreatedBy | CreatedBy | INDEX |  |
